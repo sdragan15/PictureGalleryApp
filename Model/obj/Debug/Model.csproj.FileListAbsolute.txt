@@ -1,0 +1,12 @@
+E:\Treca godina\RVA\PictureGalleryApp\Model\bin\Debug\Model.dll
+E:\Treca godina\RVA\PictureGalleryApp\Model\bin\Debug\Model.pdb
+E:\Treca godina\RVA\PictureGalleryApp\Model\obj\Debug\Model.csproj.AssemblyReference.cache
+E:\Treca godina\RVA\PictureGalleryApp\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+E:\Treca godina\RVA\PictureGalleryApp\Model\obj\Debug\Model.dll
+E:\Treca godina\RVA\PictureGalleryApp\Model\obj\Debug\Model.pdb
+E:\Treca godina\RVA\PictureGalleryApp\Model\bin\Debug\Model.dll.config
+E:\Treca godina\RVA\PictureGalleryApp\Model\bin\Debug\EntityFramework.dll
+E:\Treca godina\RVA\PictureGalleryApp\Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\Treca godina\RVA\PictureGalleryApp\Model\bin\Debug\EntityFramework.xml
+E:\Treca godina\RVA\PictureGalleryApp\Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\Treca godina\RVA\PictureGalleryApp\Model\obj\Debug\Model.csproj.CopyComplete

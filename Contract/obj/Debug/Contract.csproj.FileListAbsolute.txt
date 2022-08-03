@@ -1,0 +1,12 @@
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\Contract.dll
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\Contract.pdb
+E:\Treca godina\RVA\PictureGalleryApp\Contract\obj\Debug\Contract.csproj.AssemblyReference.cache
+E:\Treca godina\RVA\PictureGalleryApp\Contract\obj\Debug\Contract.csproj.CoreCompileInputs.cache
+E:\Treca godina\RVA\PictureGalleryApp\Contract\obj\Debug\Contract.dll
+E:\Treca godina\RVA\PictureGalleryApp\Contract\obj\Debug\Contract.pdb
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\Contract.dll.config
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\EntityFramework.dll
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\EntityFramework.SqlServer.dll
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\EntityFramework.xml
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\EntityFramework.SqlServer.xml
+E:\Treca godina\RVA\PictureGalleryApp\Contract\obj\Debug\Contract.csproj.CopyComplete
