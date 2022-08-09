@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class User
+    public class RegisterModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,9 +16,9 @@ namespace Model
         public string Name { get; set; }
         public string Lastname { get; set; }
         public string Username { get; set; }
+        public string Password { get; set; }
+        public string Token { get; set; }
 
-        public User() { }
-
-       
+        public RegisterModel() { }
     }
 }

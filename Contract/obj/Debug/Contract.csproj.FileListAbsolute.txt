@@ -10,3 +10,6 @@ E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\EntityFramework.SqlServ
 E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\EntityFramework.xml
 E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\EntityFramework.SqlServer.xml
 E:\Treca godina\RVA\PictureGalleryApp\Contract\obj\Debug\Contract.csproj.CopyComplete
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\Model.dll
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\Model.pdb
+E:\Treca godina\RVA\PictureGalleryApp\Contract\bin\Debug\Model.dll.config

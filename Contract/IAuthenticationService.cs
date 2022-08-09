@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -11,8 +12,8 @@ namespace Contract
     public interface IAuthenticationService
     {
         [OperationContract]
-        bool Register(string username, string password);
+        bool Register(RegisterModel register);
         [OperationContract]
-        bool Login(string username, string password);
+        string Login(LoginModel login);
     }
 }

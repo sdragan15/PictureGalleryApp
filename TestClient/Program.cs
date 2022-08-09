@@ -20,34 +20,34 @@ namespace TestClient
             ChannelFactory<IAuthenticationService> factoryAuth = new ChannelFactory<IAuthenticationService>(new NetTcpBinding(), endpointAuth);
             IAuthenticationService proxyAuth = factoryAuth.CreateChannel();
 
-            while (true)
-            {
-                Console.WriteLine("1 -> Register");
-                Console.WriteLine("2 -> Send message");
-                switch (int.Parse(Console.ReadLine()))
-                {
-                    case 1:
-                        Console.WriteLine("Username: ");
-                        string username = Console.ReadLine();
-                        Console.WriteLine("Password: ");
-                        string password = Console.ReadLine();
-                        proxyAuth.Register(username, password);
-                        break;
-                    case 2:
-                        Console.WriteLine("Send some text");
-                        string message = Console.ReadLine();
-                        proxy.SendMessage(message);
-                        Console.WriteLine("Message sent\n");
+            //while (true)
+            //{
+            //    Console.WriteLine("1 -> Register");
+            //    Console.WriteLine("2 -> Send message");
+            //    switch (int.Parse(Console.ReadLine()))
+            //    {
+            //        case 1:
+            //            Console.WriteLine("Username: ");
+            //            string username = Console.ReadLine();
+            //            Console.WriteLine("Password: ");
+            //            string password = Console.ReadLine();
+            //            proxyAuth.Register(username, password);
+            //            break;
+            //        case 2:
+            //            Console.WriteLine("Send some text");
+            //            string message = Console.ReadLine();
+            //            proxy.SendMessage(message);
+            //            Console.WriteLine("Message sent\n");
 
-                        break;
-                    default:
-                        return;
-                }
+            //            break;
+            //        default:
+            //            return;
+            //    }
 
-                Console.WriteLine("Done\n");
+            //    Console.WriteLine("Done\n");
                 
 
-            }
+            //}
         }
     }
 }

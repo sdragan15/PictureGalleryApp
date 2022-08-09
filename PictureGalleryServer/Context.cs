@@ -11,5 +11,6 @@ namespace PictureGalleryServer
     public class Context: DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<RegisterModel> Register { get; set; }
     }
 }
