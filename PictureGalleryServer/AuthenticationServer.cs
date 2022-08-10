@@ -15,14 +15,15 @@ namespace PictureGalleryServer
         private ServiceHost serviceHost;
 
 
-        public AuthenticationServer(){}
-
-        public void Open(DatabaseService databaseService)
-        {
+        public AuthenticationServer(){
             string endpoint = String.Format("net.tcp://localhost:10106/{0}", endpointName);
             NetTcpBinding binding = new NetTcpBinding();
             serviceHost = new ServiceHost(typeof(AuthenticationService));
-            serviceHost.AddServiceEndpoint(typeof(IAuthenticationService), binding, endpoint);
+            serviceHost.AddServiceEndpoint(typeof(IAutenticationAndAuthorization), binding, endpoint);
+        }
+
+        public void Open()
+        {
             serviceHost.Open();
         }
 

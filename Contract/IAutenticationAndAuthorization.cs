@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 namespace Contract
 {
     [ServiceContract]
-    public interface IMessageService
+    public interface IAutenticationAndAuthorization : IAuthorizationService, IAuthenticationService
     {
-        [OperationContract]
-        void SendMessage(string message, string token);
+
     }
 }

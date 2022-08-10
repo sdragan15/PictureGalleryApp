@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 namespace Contract
 {
     [ServiceContract]
-    public interface IMessageService
+    public interface IAuthorizationService
     {
         [OperationContract]
-        void SendMessage(string message, string token);
+        bool IsAuthorized(List<Roles> roles, string token);
     }
 }

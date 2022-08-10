@@ -17,3 +17,7 @@ E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryServer\bin\Debug\EntityFrame
 E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryServer\bin\Debug\EntityFramework.SqlServer.xml
 E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryServer\bin\Debug\Contract.dll.config
 E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryServer\bin\Debug\Model.dll.config
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryServer\obj\Debug\PictureGalleryServer.Migrations.InitialCreate.resources
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryServer\obj\Debug\PictureGalleryServer.csproj.GenerateResource.cache
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryServer\obj\Debug\PictureGalleryServer.Migrations.updateDb.resources
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryServer\obj\Debug\PictureGalleryServer.Migrations.registerRolesProerty.resources

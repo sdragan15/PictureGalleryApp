@@ -66,6 +66,10 @@
       <Project>{4F47DCF3-14FE-4450-B11B-A4E1633414F5}</Project>
       <Name>Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{B448F256-C87F-43F1-A2AB-D1C44A919299}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

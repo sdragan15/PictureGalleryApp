@@ -13,5 +13,7 @@ namespace Contract
         bool AddRegister(RegisterModel model);
         bool UpdateRegister(RegisterModel model);
         bool DeleteRegister(RegisterModel model);
+        void IsAuthenticated(string token);
+        void IsAuthorized(List<Roles> roles, string token);
     }
 }

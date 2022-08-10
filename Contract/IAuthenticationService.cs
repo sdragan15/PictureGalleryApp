@@ -12,8 +12,12 @@ namespace Contract
     public interface IAuthenticationService
     {
         [OperationContract]
-        bool Register(RegisterModel register);
+        bool RegisterUser(RegisterModel register);
+        [OperationContract]
+        bool RegisterAdmin(RegisterModel register);
         [OperationContract]
         string Login(LoginModel login);
+        [OperationContract]
+        bool IsAuthenticated(string token);
     }
 }

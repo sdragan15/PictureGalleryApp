@@ -10,63 +10,101 @@ using System.Threading.Tasks;
 
 namespace PictureGalleryServer
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationService : IAutenticationAndAuthorization
     {
         private static string secretKey = "f002c204c@f6(bb942765#826bDfe68affe80!08d6e714cGfb8bf1cd3b20d92c";
         private DatabaseService _dbService;
 
-        public AuthenticationService(DatabaseService databaseService)
+        public AuthenticationService()
         {
-            _dbService = databaseService;
+            _dbService = new DatabaseService(new Context());
         }
+
 
         public string Login(LoginModel login)
         {
-            RegisterModel user = _dbService.GetRegisterByUsername(login.Username);
-            if(user == null)
+            try
             {
-                return "LoginError";
-            }
+                RegisterModel user = _dbService.GetRegisterByUsername(login.Username);
+                if (user == null)
+                {
+                    return "";
+                }
 
-            if(!MatchPassword(login.Password, user.Password))
+                if (!MatchPassword(login.Password, user.Password))
+                {
+                    return "";
+                }
+
+                return user.Token;
+            }
+            catch (Exception ex)
             {
-                return "LoginError";
+                Console.WriteLine(ex.Message);
+                return "";
             }
-
-            return user.Token;
+           
         }
 
-        public bool Register(RegisterModel register)
+        public RegisterModel Register(RegisterModel register)
         {
-            if(!register.Username.Trim().Equals("") || !register.Password.Trim().Equals(""))
+            try
             {
-                return false;
-            }
+                if (register.Username.Trim().Equals("") || register.Password.Trim().Equals(""))
+                {
+                    return null;
+                }
 
-            User user = new User();
-            user.Username = register.Username;
-            user.Name = register.Name;
-            user.Lastname = register.Lastname;
+                User user = new User();
+                user.Username = register.Username;
+                user.Name = register.Name;
+                user.Lastname = register.Lastname;
 
 
-            register.Token = GenerateToken();
+                register.Token = GenerateToken();
+                register.Password = MakeHash(register.Password);
 
-            using (var context = new Context())
-            {
-                _dbService.AddRegister(register);
                 _dbService.AddUser(user);
-            }
 
-            return true;
+                return register;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public bool IsAuthenticated(string token)
+        {
+            try
+            {
+                _dbService.IsAuthenticated(token);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public static bool MatchPassword(string newPassword, string hashedPassword)
         {
-            if (hashedPassword.Equals(MakeHash(newPassword))){
-                return true;
-            }
+            try
+            {
+                if (hashedPassword.Equals(MakeHash(newPassword)))
+                {
+                    return true;
+                }
 
-            return false;
+                return false;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+            
         }
 
         private static string MakeHash(string password)
@@ -84,6 +122,52 @@ namespace PictureGalleryServer
         private static string GenerateToken()
         {
             return Guid.NewGuid().ToString();
+        }
+
+        public bool IsAuthorized(List<Roles> roles, string token)
+        {
+            try
+            {
+                _dbService.IsAuthorized(roles, token);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool RegisterUser(RegisterModel register)
+        {
+            try
+            {
+                RegisterModel model = Register(register);
+                model.Role = Roles.User;
+                _dbService.AddRegister(model);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            
+        }
+
+        public bool RegisterAdmin(RegisterModel register)
+        {
+            try
+            {
+                RegisterModel model = Register(register);
+                model.Role = Roles.Admin;
+                _dbService.AddRegister(model);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
     }
 }

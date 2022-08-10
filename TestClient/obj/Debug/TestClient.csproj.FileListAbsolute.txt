@@ -14,3 +14,6 @@ E:\Treca godina\RVA\PictureGalleryApp\TestClient\bin\Debug\EntityFramework.SqlSe
 E:\Treca godina\RVA\PictureGalleryApp\TestClient\bin\Debug\Contract.dll.config
 E:\Treca godina\RVA\PictureGalleryApp\TestClient\bin\Debug\EntityFramework.xml
 E:\Treca godina\RVA\PictureGalleryApp\TestClient\bin\Debug\EntityFramework.SqlServer.xml
+E:\Treca godina\RVA\PictureGalleryApp\TestClient\bin\Debug\Model.dll
+E:\Treca godina\RVA\PictureGalleryApp\TestClient\bin\Debug\Model.pdb
+E:\Treca godina\RVA\PictureGalleryApp\TestClient\bin\Debug\Model.dll.config

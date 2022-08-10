@@ -17,28 +17,48 @@ namespace PictureGalleryServer.Services
             _context = context;
         }
 
+        public DatabaseService()
+        {
+        }
+
         public bool AddUser(User model)
         {
-            if(_context.Users.FirstOrDefault(u => u.Username.Equals(model.Username)) != null)
+            try
             {
-                return false;
-            }
+                if (_context.Users.FirstOrDefault(u => u.Username.Equals(model.Username)) != null)
+                {
+                    return false;
+                }
 
-            _context.Users.Add(model);
-            _context.SaveChanges();
-            return true;
+                _context.Users.Add(model);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Internal server error");
+            }
+            
         }
 
         public bool AddRegister(RegisterModel model)
         {
-            if (_context.Register.FirstOrDefault(u => u.Username.Equals(model.Username)) != null)
+            try
             {
-                return false;
-            }
+                if (_context.Register.FirstOrDefault(u => u.Username.Equals(model.Username)) != null)
+                {
+                    return false;
+                }
 
-            _context.Register.Add(model);
-            _context.SaveChanges();
-            return true;
+                _context.Register.Add(model);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Internal server error");
+            }
+            
         }
 
         public bool DeleteUser(User model)
@@ -53,7 +73,15 @@ namespace PictureGalleryServer.Services
 
         public User GetUserByUsername(string username)
         {
-            return _context.Users.FirstOrDefault(u => u.Username.Equals(username));
+            try
+            {
+                return _context.Users.FirstOrDefault(u => u.Username.Equals(username));
+            }
+            catch(Exception)
+            {
+                throw new Exception("User dont exist");
+            }
+            
         }
 
         public bool UpdateUser(User model)
@@ -68,7 +96,40 @@ namespace PictureGalleryServer.Services
 
         public RegisterModel GetRegisterByUsername(string username)
         {
-            return _context.Register.FirstOrDefault(u => u.Username.Equals(username));
+            try
+            {
+                return _context.Register.FirstOrDefault(u => u.Username.Equals(username));
+            }
+            catch (Exception)
+            {
+                throw new Exception("User dont exist");
+            }
+            
+        }
+
+        public void IsAuthenticated(string token)
+        {
+            if(_context.Register.FirstOrDefault(u => u.Token.Equals(token)) == null)
+            {
+                throw new Exception("User is not authenticated!");
+            }
+
+        }
+
+
+        public void IsAuthorized(List<Roles> roles, string token)
+        {
+            RegisterModel model = _context.Register.FirstOrDefault(u => u.Token.Equals(token));
+
+            if (model == null)
+            {
+                throw new Exception("User with this token doesn't exist");
+            }
+
+            if (!roles.Contains(model.Role))
+            {
+                throw new Exception("User is not authorized!");
+            }
         }
     }
 }
