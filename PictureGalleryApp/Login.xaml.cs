@@ -16,15 +16,23 @@ using System.Windows.Shapes;
 namespace PictureGalleryApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : Page
     {
-        public MainWindow()
+        public Login()
         {
             InitializeComponent();
-            Style = (Style)FindResource(typeof(Window));
-            MainFrame.Content = new Login();
+        }
+
+
+        private void signUpBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            if (mainWindow != null)
+            {
+                mainWindow.MainFrame.Content = new SingUp();
+            }
         }
     }
 }

@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:PictureGalleryApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Consolas" />
+        </Style>
     </Application.Resources>
+    
 </Application>

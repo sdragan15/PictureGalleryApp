@@ -19,3 +19,8 @@ E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\bin\Debug\EntityFramewor
 E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\bin\Debug\EntityFramework.xml
 E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\bin\Debug\EntityFramework.SqlServer.xml
 E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\obj\Debug\PictureGalleryApp.csproj.CopyComplete
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\obj\Debug\App.baml
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\obj\Debug\Login.g.cs
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\obj\Debug\Login.baml
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\obj\Debug\SingUp.g.cs
+E:\Treca godina\RVA\PictureGalleryApp\PictureGalleryApp\obj\Debug\SingUp.baml
