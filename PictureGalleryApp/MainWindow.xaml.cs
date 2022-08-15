@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PictureGalleryApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,7 @@ namespace PictureGalleryApp
         public MainWindow()
         {
             InitializeComponent();
-            Style = (Style)FindResource(typeof(Window));
-            MainFrame.Content = new Login();
+            DataContext = new MainWindowViewModel();
         }
     }
 }

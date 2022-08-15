@@ -13,26 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PictureGalleryApp
+namespace PictureGalleryApp.Views
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for SignUpView.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class SignUpView : UserControl
     {
-        public Login()
+        public SignUpView()
         {
             InitializeComponent();
-        }
-
-
-        private void signUpBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            if (mainWindow != null)
-            {
-                mainWindow.MainFrame.Content = new SingUp();
-            }
         }
     }
 }
