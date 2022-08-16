@@ -68,6 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\UpdateViewCommand.cs" />
+    <Compile Include="Contract\ILoginViewModel.cs" />
+    <Compile Include="Contract\IMainViewModel.cs" />
+    <Compile Include="Contract\ISignUpViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

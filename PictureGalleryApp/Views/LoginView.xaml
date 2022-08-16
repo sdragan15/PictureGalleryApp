@@ -31,7 +31,11 @@
                 <TextBox Padding="5" Margin="10">username</TextBox>
                 <PasswordBox Padding="5" Margin="10"></PasswordBox>
                 <Button Background="#01d3d8" Padding="5" Margin="10">Log in</Button>
-                <Label x:Name="signUpBtn" HorizontalAlignment="Center">or SingUp
+                <Label x:Name="signUpBtn" HorizontalAlignment="Center">or Sing up
+                    <Label.InputBindings>
+                        <MouseBinding Command="{Binding UpdateViewCommand}" CommandParameter="signup" MouseAction="LeftClick"/>
+                    </Label.InputBindings>
+                    
                     <Label.Style>
                         <Style TargetType="Label">
                             <Setter Property="Foreground" Value="Black" />

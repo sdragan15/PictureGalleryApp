@@ -34,6 +34,9 @@
                 <PasswordBox Padding="5" Margin="10 5 10 5"></PasswordBox>
                 <Button Background="#01d3d8" Padding="5" Margin="10">Sing up</Button>
                 <Label x:Name="logInBtn" HorizontalAlignment="Center">or Log in
+                    <Label.InputBindings>
+                        <MouseBinding Command="{Binding UpdateViewCommand}" CommandParameter="login" MouseAction="LeftClick"/>
+                    </Label.InputBindings>
                     <Label.Style>
                         <Style TargetType="Label">
                             <Setter Property="Foreground" Value="Black" />
