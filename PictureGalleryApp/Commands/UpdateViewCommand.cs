@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using PictureGalleryApp.Contract;
 using PictureGalleryApp.Messages;
 using PictureGalleryApp.ViewModel;
 using System;

@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using PictureGalleryApp.Commands;
-using PictureGalleryApp.Contract;
 using PictureGalleryApp.Model;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace PictureGalleryApp.ViewModel
 {
-    public class LoginViewModel: BaseViewModel, ILoginViewModel
+    public class LoginViewModel: ViewModelBase
     {
         public ICommand UpdateViewCommand { get; set; }
         public ICommand LoginCommand { get; set; }
@@ -25,7 +25,7 @@ namespace PictureGalleryApp.ViewModel
             set
             {
                 _loginBindingModel = value;
-                OnPropertyChanged(nameof(LoginBindingModel));
+                Set(ref _loginBindingModel, value);
             }
         }
 

@@ -1,5 +1,5 @@
-﻿using PictureGalleryApp.Commands;
-using PictureGalleryApp.Contract;
+﻿using GalaSoft.MvvmLight;
+using PictureGalleryApp.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +9,12 @@ using System.Windows.Input;
 
 namespace PictureGalleryApp.ViewModel
 {
-    public class SignUpViewModel: BaseViewModel, ISignUpViewModel
+    public class SignUpViewModel: ViewModelBase
     {
-        private IMainViewModel _mainViewModel;
         public ICommand UpdateViewCommand { get; set; }
 
-        public SignUpViewModel(IMainViewModel main)
+        public SignUpViewModel()
         {
-            _mainViewModel = main;
             UpdateViewCommand = new UpdateViewCommand();
         }
     }

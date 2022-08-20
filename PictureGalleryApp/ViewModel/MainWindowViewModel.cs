@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using PictureGalleryApp.Contract;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using PictureGalleryApp.Messages;
 using PictureGalleryApp.Model;
 using System;
@@ -11,14 +11,14 @@ using System.Windows;
 
 namespace PictureGalleryApp.ViewModel
 {
-    public class MainWindowViewModel: BaseViewModel, IMainViewModel
+    public class MainWindowViewModel: ViewModelBase
     {
-        private BaseViewModel _currentViewModel;
-        private LoginViewModel _loginViewModel;
+        private ViewModelBase _currentViewModel;
         private SignUpViewModel _signUpViewModel;
+        private LoginViewModel _loginViewModel;
 
 
-        public BaseViewModel CurrentViewModel
+        public ViewModelBase CurrentViewModel
         {
             get
             {
@@ -26,22 +26,32 @@ namespace PictureGalleryApp.ViewModel
             }
             set
             {
-                _currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
+                Set(ref _currentViewModel, value);
             }
         }
 
-        public MainWindowViewModel()
+        [Obsolete("Only for design data", true)]
+        public MainWindowViewModel(): this(new LoginViewModel(), null)
         {
-            _signUpViewModel = new SignUpViewModel(this);
-            _loginViewModel = new LoginViewModel();
+            if (!this.IsInDesignMode)
+            {
+                throw new Exception("Use only for design mode");
+            }
+        }
+
+        public MainWindowViewModel(LoginViewModel loginView, SignUpViewModel signUpView)
+        {
+            _signUpViewModel = signUpView;
+            _loginViewModel = loginView;
             CurrentViewModel = _loginViewModel;
             Messenger.Default.Register<ChangePage>(this, UpdateCurrentView);
-            
         }
+
+
 
         public void UpdateCurrentView(ChangePage message)
         {
+            Console.WriteLine(message.ViewModelType);
             if(message.ViewModelType == typeof(LoginViewModel))
             {
                 CurrentViewModel = _loginViewModel;
@@ -49,6 +59,7 @@ namespace PictureGalleryApp.ViewModel
             else if(message.ViewModelType == typeof(SignUpViewModel))
             {
                 CurrentViewModel = _signUpViewModel;
+                Console.WriteLine("Uslo" + CurrentViewModel);
             }
             else
             {

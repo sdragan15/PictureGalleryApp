@@ -1,5 +1,4 @@
-﻿using PictureGalleryApp.Contract;
-using PictureGalleryApp.ViewModel;
+﻿using PictureGalleryApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +21,10 @@ namespace PictureGalleryApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IMainViewModel _mainWindowViewModel;
-
-        public MainWindow()
+        public MainWindow(MainWindowViewModel main)
         {
-            _mainWindowViewModel = new MainWindowViewModel();
-
             InitializeComponent();
-            DataContext = _mainWindowViewModel;
+            DataContext = main;
         }
     }
 }
