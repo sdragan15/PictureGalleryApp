@@ -1,5 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using PictureGalleryApp.Contract;
+using PictureGalleryApp.Server.Services;
 using PictureGalleryApp.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -22,10 +24,12 @@ namespace PictureGalleryApp
         {
             base.OnStartup(e);
             container = new WindsorContainer();
+            container.Register(Component.For<AlbumsViewModel>());
             container.Register(Component.For<LoginViewModel>());
             container.Register(Component.For<SignUpViewModel>());
             container.Register(Component.For<MainWindowViewModel>());
             container.Register(Component.For<MainWindow>());
+            
 
             var mainWindow = container.Resolve<MainWindow>();
             mainWindow.ShowDialog();

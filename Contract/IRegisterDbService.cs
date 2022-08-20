@@ -9,10 +9,10 @@ namespace Contract
 {
     public interface IRegisterDbService
     {
-        RegisterModel GetRegisterByUsername(string username);
-        bool AddRegister(RegisterModel model);
-        bool UpdateRegister(RegisterModel model);
-        bool DeleteRegister(RegisterModel model);
+        RegisterModelDto GetRegisterByUsername(string username);
+        bool AddRegister(RegisterModelDto model);
+        bool UpdateRegister(RegisterModelDto model);
+        bool DeleteRegister(RegisterModelDto model);
         void IsAuthenticated(string token);
         void IsAuthorized(List<Roles> roles, string token);
     }

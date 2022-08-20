@@ -67,6 +67,10 @@
     <Compile Include="Migrations\202208101801194_registerRolesProerty.designer.cs">
       <DependentUpon>202208101801194_registerRolesProerty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208201959336_Dto.cs" />
+    <Compile Include="Migrations\202208201959336_Dto.designer.cs">
+      <DependentUpon>202208201959336_Dto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Context.cs" />
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208101801194_registerRolesProerty.resx">
       <DependentUpon>202208101801194_registerRolesProerty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208201959336_Dto.resx">
+      <DependentUpon>202208201959336_Dto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

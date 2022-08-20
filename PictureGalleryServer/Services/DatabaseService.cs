@@ -41,7 +41,7 @@ namespace PictureGalleryServer.Services
             
         }
 
-        public bool AddRegister(RegisterModel model)
+        public bool AddRegister(RegisterModelDto model)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace PictureGalleryServer.Services
             throw new NotImplementedException();
         }
 
-        public bool DeleteRegister(RegisterModel model)
+        public bool DeleteRegister(RegisterModelDto model)
         {
             throw new NotImplementedException();
         }
@@ -89,12 +89,12 @@ namespace PictureGalleryServer.Services
             throw new NotImplementedException();
         }
 
-        public bool UpdateRegister(RegisterModel model)
+        public bool UpdateRegister(RegisterModelDto model)
         {
             throw new NotImplementedException();
         }
 
-        public RegisterModel GetRegisterByUsername(string username)
+        public RegisterModelDto GetRegisterByUsername(string username)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace PictureGalleryServer.Services
 
         public void IsAuthorized(List<Roles> roles, string token)
         {
-            RegisterModel model = _context.Register.FirstOrDefault(u => u.Token.Equals(token));
+            RegisterModelDto model = _context.Register.FirstOrDefault(u => u.Token.Equals(token));
 
             if (model == null)
             {

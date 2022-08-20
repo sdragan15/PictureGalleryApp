@@ -21,11 +21,11 @@ namespace PictureGalleryServer
         }
 
 
-        public string Login(LoginModel login)
+        public string Login(LoginModelDto login)
         {
             try
             {
-                RegisterModel user = _dbService.GetRegisterByUsername(login.Username);
+                RegisterModelDto user = _dbService.GetRegisterByUsername(login.Username);
                 if (user == null)
                 {
                     return "";
@@ -46,7 +46,7 @@ namespace PictureGalleryServer
            
         }
 
-        public RegisterModel Register(RegisterModel register)
+        public RegisterModelDto Register(RegisterModelDto register)
         {
             try
             {
@@ -137,11 +137,11 @@ namespace PictureGalleryServer
             }
         }
 
-        public bool RegisterUser(RegisterModel register)
+        public bool RegisterUser(RegisterModelDto register)
         {
             try
             {
-                RegisterModel model = Register(register);
+                RegisterModelDto model = Register(register);
                 model.Role = Roles.User;
                 _dbService.AddRegister(model);
                 return true;
@@ -154,11 +154,11 @@ namespace PictureGalleryServer
             
         }
 
-        public bool RegisterAdmin(RegisterModel register)
+        public bool RegisterAdmin(RegisterModelDto register)
         {
             try
             {
-                RegisterModel model = Register(register);
+                RegisterModelDto model = Register(register);
                 model.Role = Roles.Admin;
                 _dbService.AddRegister(model);
                 return true;

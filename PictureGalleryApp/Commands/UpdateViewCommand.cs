@@ -32,6 +32,10 @@ namespace PictureGalleryApp.Commands
             {
                 Messenger.Default.Send(new ChangePage(typeof(SignUpViewModel)));
             }
+            else if (parameter.Equals("loggedin"))
+            {
+                Messenger.Default.Send(new ChangePage(typeof(AlbumsViewModel)));
+            }
         }
     }
 }

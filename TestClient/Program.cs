@@ -40,21 +40,21 @@ namespace TestClient
                             username = Console.ReadLine();
                             Console.WriteLine("Password: ");
                             password = Console.ReadLine();
-                            proxyAuth.RegisterAdmin(new RegisterModel() { Username = username, Password = password });
+                            proxyAuth.RegisterAdmin(new RegisterModelDto() { Username = username, Password = password });
                             break;
                         case 2:
                             Console.WriteLine("Username: ");
                             username = Console.ReadLine();
                             Console.WriteLine("Password: ");
                             password = Console.ReadLine();
-                            proxyAuth.RegisterUser(new RegisterModel() { Username = username, Password = password });
+                            proxyAuth.RegisterUser(new RegisterModelDto() { Username = username, Password = password });
                             break;
                         case 3:
                             Console.WriteLine("Username: ");
                             username = Console.ReadLine();
                             Console.WriteLine("Password: ");
                             password = Console.ReadLine();
-                            token = proxyAuth.Login(new LoginModel() { Username = username, Password = password });
+                            token = proxyAuth.Login(new LoginModelDto() { Username = username, Password = password });
 
                             break;
                         case 4:

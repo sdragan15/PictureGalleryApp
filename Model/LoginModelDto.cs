@@ -8,18 +8,14 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class RegisterModel
+    public class LoginModelDto
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Lastname { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Token { get; set; }
-        public Roles Role { get; set; }
 
-        public RegisterModel() { }
+        public LoginModelDto() { }
     }
 }

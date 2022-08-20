@@ -16,6 +16,7 @@ namespace PictureGalleryApp.ViewModel
         private ViewModelBase _currentViewModel;
         private SignUpViewModel _signUpViewModel;
         private LoginViewModel _loginViewModel;
+        private AlbumsViewModel _albumsViewModel;
 
 
         public ViewModelBase CurrentViewModel
@@ -31,7 +32,7 @@ namespace PictureGalleryApp.ViewModel
         }
 
         [Obsolete("Only for design data", true)]
-        public MainWindowViewModel(): this(new LoginViewModel(), null)
+        public MainWindowViewModel(): this(new LoginViewModel(), null, null)
         {
             if (!this.IsInDesignMode)
             {
@@ -39,10 +40,11 @@ namespace PictureGalleryApp.ViewModel
             }
         }
 
-        public MainWindowViewModel(LoginViewModel loginView, SignUpViewModel signUpView)
+        public MainWindowViewModel(LoginViewModel loginView, SignUpViewModel signUpView, AlbumsViewModel albumsView)
         {
             _signUpViewModel = signUpView;
             _loginViewModel = loginView;
+            _albumsViewModel = albumsView;
             CurrentViewModel = _loginViewModel;
             Messenger.Default.Register<ChangePage>(this, UpdateCurrentView);
         }
@@ -59,7 +61,10 @@ namespace PictureGalleryApp.ViewModel
             else if(message.ViewModelType == typeof(SignUpViewModel))
             {
                 CurrentViewModel = _signUpViewModel;
-                Console.WriteLine("Uslo" + CurrentViewModel);
+            }
+            else if(message.ViewModelType == typeof(AlbumsViewModel))
+            {
+                CurrentViewModel = _albumsViewModel;
             }
             else
             {

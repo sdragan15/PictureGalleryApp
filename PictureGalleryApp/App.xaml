@@ -11,9 +11,9 @@
         <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
             <views:LoginView/>
         </DataTemplate>
-        <!--<DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+        <DataTemplate DataType="{x:Type viewModel:AlbumsViewModel}">
             <views:AlbumsView/>
-        </DataTemplate>-->
+        </DataTemplate>
     </Application.Resources>
     
 </Application>
