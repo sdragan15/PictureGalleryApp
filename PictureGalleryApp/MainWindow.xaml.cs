@@ -22,16 +22,14 @@ namespace PictureGalleryApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IMainViewModel _mainWindowViewModelStatic;
+        private IMainViewModel _mainWindowViewModel;
 
         public MainWindow()
         {
-            _mainWindowViewModelStatic = new MainWindowViewModel();
-            
+            _mainWindowViewModel = new MainWindowViewModel();
 
             InitializeComponent();
-            DataContext = _mainWindowViewModelStatic;
-
+            DataContext = _mainWindowViewModel;
         }
     }
 }

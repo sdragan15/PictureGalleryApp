@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PictureGalleryApp.Views"
+             xmlns:viewModel="clr-namespace:PictureGalleryApp.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             FontSize="15">
+             FontSize="15"
+             d:DataContext="{d:DesignInstance viewModel:LoginViewModel,
+                                              IsDesignTimeCreatable=True}">
     <Grid>
         
 
@@ -16,9 +19,9 @@
             </Border.Effect>
             <StackPanel>
                 <Label FontWeight="Bold" FontSize="30" Grid.Column="1" Grid.Row="1">Log in</Label>
-                <TextBox Padding="5" Margin="10">username</TextBox>
+                <TextBox Text="{Binding LoginBindingModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10"></TextBox>
                 <PasswordBox Padding="5" Margin="10"></PasswordBox>
-                <Button Background="#01d3d8" Padding="5" Margin="10">Log in</Button>
+                <Button Command="{Binding LoginCommand}" Background="#01d3d8" Padding="5" Margin="10">Log in</Button>
                 <Label x:Name="signUpBtn" HorizontalAlignment="Center">or Sing up
                     <Label.InputBindings>
                         <MouseBinding Command="{Binding UpdateViewCommand}" CommandParameter="signup" MouseAction="LeftClick"/>

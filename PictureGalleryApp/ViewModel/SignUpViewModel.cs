@@ -17,7 +17,7 @@ namespace PictureGalleryApp.ViewModel
         public SignUpViewModel(IMainViewModel main)
         {
             _mainViewModel = main;
-            UpdateViewCommand = new UpdateViewCommand(_mainViewModel);
+            UpdateViewCommand = new UpdateViewCommand();
         }
     }
 }

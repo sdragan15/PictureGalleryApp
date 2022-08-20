@@ -1,4 +1,6 @@
-﻿using PictureGalleryApp.Contract;
+﻿using GalaSoft.MvvmLight.Messaging;
+using PictureGalleryApp.Contract;
+using PictureGalleryApp.Messages;
 using PictureGalleryApp.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,12 +13,7 @@ namespace PictureGalleryApp.Commands
 {
     public class UpdateViewCommand : ICommand
     {
-        private IMainViewModel _mainViewModel;
 
-        public UpdateViewCommand(IMainViewModel main)
-        {
-            _mainViewModel = main;
-        }
 
         public event EventHandler CanExecuteChanged;
 
@@ -27,14 +24,14 @@ namespace PictureGalleryApp.Commands
 
         public void Execute(object parameter)
         {
-            Console.WriteLine("hellooosadg " + parameter.ToString());
+            Console.WriteLine("Hello " + parameter);
             if (parameter.Equals("login"))
             {
-                _mainViewModel.UpdateCurrentView(new LoginViewModel(_mainViewModel));
+                Messenger.Default.Send(new ChangePage(typeof(LoginViewModel)));
             }
             else if (parameter.Equals("signup"))
             {
-                _mainViewModel.UpdateCurrentView(new SignUpViewModel(_mainViewModel));
+                Messenger.Default.Send(new ChangePage(typeof(SignUpViewModel)));
             }
         }
     }

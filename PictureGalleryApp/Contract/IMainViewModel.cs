@@ -1,4 +1,5 @@
-﻿using PictureGalleryApp.ViewModel;
+﻿using PictureGalleryApp.Messages;
+using PictureGalleryApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace PictureGalleryApp.Contract
 {
     public interface IMainViewModel
     {
-        void UpdateCurrentView(BaseViewModel baseView);
+        void UpdateCurrentView(ChangePage message);
     }
 }

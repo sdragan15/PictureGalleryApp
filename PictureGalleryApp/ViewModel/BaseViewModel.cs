@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PictureGalleryApp.ViewModel
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : DependencyObject, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
