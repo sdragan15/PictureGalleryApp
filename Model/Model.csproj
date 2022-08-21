@@ -51,11 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumModelDto.cs" />
+    <Compile Include="DbEntity.cs" />
     <Compile Include="LoginModelDto.cs" />
+    <Compile Include="PictureModelDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterModelDto.cs" />
     <Compile Include="Roles.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="UserModelDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

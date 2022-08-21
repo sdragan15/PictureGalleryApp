@@ -55,7 +55,7 @@ namespace PictureGalleryServer
                     return null;
                 }
 
-                User user = new User();
+                UserModelDto user = new UserModelDto();
                 user.Username = register.Username;
                 user.Name = register.Name;
                 user.Lastname = register.Lastname;

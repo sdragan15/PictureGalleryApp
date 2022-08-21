@@ -10,7 +10,8 @@ namespace PictureGalleryServer
 {
     public class Context: DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserModelDto> Users { get; set; }
         public DbSet<RegisterModelDto> Register { get; set; }
+        public DbSet<AlbumModelDto> Albums { get; set; }
     }
 }

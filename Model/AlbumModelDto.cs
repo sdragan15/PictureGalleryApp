@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class LoginModelDto : DbEntity
+    public class AlbumModelDto : DbEntity
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; }
+        public UserModelDto User { get; set; }
+        public List<PictureModelDto> Pictures { get; set; }
+        public bool IsPrivate { get; set; }
 
-        public LoginModelDto()
+        public AlbumModelDto()
         {
             IsDeleted = false;
         }

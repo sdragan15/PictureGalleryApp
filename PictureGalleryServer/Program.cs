@@ -11,20 +11,25 @@ namespace PictureGalleryServer
     {
         static void Main(string[] args)
         {
+            AlbumsServer albumsServer = new AlbumsServer();
+
             PictureServer pictureServer = new PictureServer();
             AuthenticationServer authenticationServer = new AuthenticationServer();
 
             Context context = new Context();
             DatabaseService databaseService = new DatabaseService(context);
 
-            pictureServer.Open();
+            albumsServer.Open();
+            Console.WriteLine("Albums server is open.");
             authenticationServer.Open();
-
+            Console.WriteLine("Autentication server is open.");
             Console.WriteLine("Server running...");
 
+
+            Console.WriteLine("\nPress eny key to exit");
             Console.ReadKey();
 
-            pictureServer.Close();
+            albumsServer.Close();
             authenticationServer.Close();
         }
     }

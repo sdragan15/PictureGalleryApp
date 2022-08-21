@@ -9,9 +9,9 @@ namespace Contract
 {
     public interface IUserDbService
     {
-        User GetUserByUsername(string username);
-        bool AddUser(User model);
-        bool UpdateUser(User model);
-        bool DeleteUser(User model);
+        UserModelDto GetUserByUsername(string username);
+        bool AddUser(UserModelDto model);
+        bool UpdateUser(UserModelDto model);
+        bool DeleteUser(UserModelDto model);
     }
 }

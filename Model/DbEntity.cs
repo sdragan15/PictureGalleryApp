@@ -8,17 +8,12 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class User
+    public abstract class DbEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Lastname { get; set; }
-        public string Username { get; set; }
-
-        public User() { }
-
-       
+        [Required]
+        public bool IsDeleted { get; set; }
     }
 }

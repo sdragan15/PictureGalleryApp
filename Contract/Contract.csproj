@@ -52,10 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAlbumDbService.cs" />
     <Compile Include="IAutenticationAndAuthorization.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="IAuthorizationService.cs" />
     <Compile Include="IMessageService.cs" />
+    <Compile Include="IPictureDbService.cs" />
     <Compile Include="IRegisterDbService.cs" />
     <Compile Include="IUserDbService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

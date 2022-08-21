@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumsServer.cs" />
     <Compile Include="AuthenticationServer.cs" />
     <Compile Include="Migrations\202208032047344_InitialCreate.cs" />
     <Compile Include="Migrations\202208032047344_InitialCreate.designer.cs">
@@ -71,7 +72,24 @@
     <Compile Include="Migrations\202208201959336_Dto.designer.cs">
       <DependentUpon>202208201959336_Dto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208211439561_dbEntity.cs" />
+    <Compile Include="Migrations\202208211439561_dbEntity.designer.cs">
+      <DependentUpon>202208211439561_dbEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208211450215_Albums.cs" />
+    <Compile Include="Migrations\202208211450215_Albums.designer.cs">
+      <DependentUpon>202208211450215_Albums.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208211453100_Album-user-id.cs" />
+    <Compile Include="Migrations\202208211453100_Album-user-id.designer.cs">
+      <DependentUpon>202208211453100_Album-user-id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208211501035_Image-data.cs" />
+    <Compile Include="Migrations\202208211501035_Image-data.designer.cs">
+      <DependentUpon>202208211501035_Image-data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Services\DatabaseService.cs" />
@@ -106,6 +124,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208201959336_Dto.resx">
       <DependentUpon>202208201959336_Dto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208211439561_dbEntity.resx">
+      <DependentUpon>202208211439561_dbEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208211450215_Albums.resx">
+      <DependentUpon>202208211450215_Albums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208211453100_Album-user-id.resx">
+      <DependentUpon>202208211453100_Album-user-id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208211501035_Image-data.resx">
+      <DependentUpon>202208211501035_Image-data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

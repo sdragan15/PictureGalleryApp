@@ -21,7 +21,7 @@ namespace PictureGalleryServer.Services
         {
         }
 
-        public bool AddUser(User model)
+        public bool AddUser(UserModelDto model)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace PictureGalleryServer.Services
             
         }
 
-        public bool DeleteUser(User model)
+        public bool DeleteUser(UserModelDto model)
         {
             throw new NotImplementedException();
         }
@@ -71,7 +71,7 @@ namespace PictureGalleryServer.Services
             throw new NotImplementedException();
         }
 
-        public User GetUserByUsername(string username)
+        public UserModelDto GetUserByUsername(string username)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace PictureGalleryServer.Services
             
         }
 
-        public bool UpdateUser(User model)
+        public bool UpdateUser(UserModelDto model)
         {
             throw new NotImplementedException();
         }

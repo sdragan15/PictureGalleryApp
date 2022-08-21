@@ -5,19 +5,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Model
 {
-    public class RegisterModelDto : DbEntity
+    public class PictureModelDto : DbEntity
     {
         public string Name { get; set; }
-        public string Lastname { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Token { get; set; }
-        public Roles Role { get; set; }
+        public DateTime Date { get; set; }
+        public string Tags { get; set; }
+        public double Rating { get; set; }
+        public byte[] ImageData { get; set; }
 
-        public RegisterModelDto()
+        public PictureModelDto()
         {
             IsDeleted = false;
         }
