@@ -20,7 +20,7 @@
             <StackPanel>
                 <Label FontWeight="Bold" FontSize="30" Grid.Column="1" Grid.Row="1">Log in</Label>
                 <TextBox Text="{Binding LoginBindingModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10"></TextBox>
-                <PasswordBox Padding="5" Margin="10"></PasswordBox>
+                <TextBox Text="{Binding LoginBindingModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Padding="5" Margin="10"></TextBox>
                 <Button Command="{Binding LoginCommand}" Background="#01d3d8" Padding="5" Margin="10">Log in</Button>
                 <Label x:Name="signUpBtn" HorizontalAlignment="Center">or Sing up
                     <Label.InputBindings>

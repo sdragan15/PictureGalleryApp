@@ -17,11 +17,11 @@
             </Border.Effect>
             <StackPanel>
                 <Label FontWeight="Bold" FontSize="30" Grid.Column="1" Grid.Row="1">Sing up</Label>
-                <TextBox Padding="5" Margin="10 5 10 5">name</TextBox>
-                <TextBox Padding="5" Margin="10 5 10 5">last name</TextBox>
-                <TextBox Padding="5" Margin="10 5 10 5">username</TextBox>
-                <PasswordBox Padding="5" Margin="10 5 10 5"></PasswordBox>
-                <Button Background="#01d3d8" Padding="5" Margin="10">Sing up</Button>
+                <TextBox Text="{Binding SignUpBindingModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                <TextBox Text="{Binding SignUpBindingModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                <TextBox Text="{Binding SignUpBindingModel.Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                <TextBox Text="{Binding SignUpBindingModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                <Button Command="{Binding SignUpCommand}" Background="#01d3d8" Padding="5" Margin="10">Sing up</Button>
                 <Label x:Name="logInBtn" HorizontalAlignment="Center">or Log in
                     <Label.InputBindings>
                         <MouseBinding Command="{Binding UpdateViewCommand}" CommandParameter="login" MouseAction="LeftClick"/>

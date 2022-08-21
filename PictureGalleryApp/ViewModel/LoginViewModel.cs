@@ -24,7 +24,7 @@ namespace PictureGalleryApp.ViewModel
 
         private LoginModel _loginBindingModel = new LoginModel();
         private string _loginUri = "net.tcp://localhost:10106/Auth";
-        private AuthTemplate _loginServer { get; set; }
+        private AuthTemplate _loginServer;
 
 
         public LoginModel LoginBindingModel
