@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using PictureGalleryApp.Commands;
 using PictureGalleryApp.Contract;
 using PictureGalleryApp.Model;
+using PictureGalleryApp.Server.Contract;
 using PictureGalleryApp.Server.Services;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace PictureGalleryApp.ViewModel
 
         private LoginModel _loginBindingModel = new LoginModel();
         private string _loginUri = "net.tcp://localhost:10106/Auth";
+        private AuthTemplate _loginServer { get; set; }
 
 
         public LoginModel LoginBindingModel
@@ -40,6 +42,7 @@ namespace PictureGalleryApp.ViewModel
             UpdateViewCommand = new UpdateViewCommand();
             LoginCommand = new RelayCommand(Login);
             LoginServerCommand = new LoginServerCommand(_loginUri, LoginBindingModel);
+            _loginServer = new LoginServer(_loginUri, LoginBindingModel);
         }
 
         //With parameter constructor
@@ -48,13 +51,11 @@ namespace PictureGalleryApp.ViewModel
 
         //}
 
-    
-
         private void Login()
         {
             Thread thread = new Thread(() =>
             {
-                if (!LoginServerCommand.Execute())
+                if (!_loginServer.Run())
                 {
                     MessageBox.Show("Failed");
                 }
@@ -66,6 +67,22 @@ namespace PictureGalleryApp.ViewModel
             thread.Start();
         }
 
-        
+        //private void Login()
+        //{
+        //    Thread thread = new Thread(() =>
+        //    {
+        //        if (!LoginServerCommand.Execute())
+        //        {
+        //            MessageBox.Show("Failed");
+        //        }
+        //        else
+        //        {
+        //            UpdateViewCommand.Execute("loggedin");
+        //        }
+        //    });
+        //    thread.Start();
+        //}
+
+
     }
 }

@@ -102,10 +102,12 @@
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\MyICommand.cs" />
     <Compile Include="Commands\UpdateViewCommand.cs" />
+    <Compile Include="Server\Contract\AuthTemplate.cs" />
     <Compile Include="Server\Contract\IServerCommand.cs" />
     <Compile Include="Messages\ChangePage.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Server\Services\LoginServerCommand.cs" />
+    <Compile Include="Server\Services\LoginServer.cs" />
     <Compile Include="ViewModel\AlbumsViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

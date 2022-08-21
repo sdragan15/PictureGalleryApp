@@ -1,6 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using PictureGalleryApp.Contract;
+using PictureGalleryApp.Server.Contract;
 using PictureGalleryApp.Server.Services;
 using PictureGalleryApp.ViewModel;
 using System;
@@ -29,6 +30,7 @@ namespace PictureGalleryApp
             container.Register(Component.For<SignUpViewModel>());
             container.Register(Component.For<MainWindowViewModel>());
             container.Register(Component.For<MainWindow>());
+            container.Register(Component.For<AuthTemplate>().ImplementedBy<LoginServer>());
             
 
             var mainWindow = container.Resolve<MainWindow>();
