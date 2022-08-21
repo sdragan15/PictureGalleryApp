@@ -104,9 +104,11 @@
     <Compile Include="Commands\UpdateViewCommand.cs" />
     <Compile Include="Model\SignUpModel.cs" />
     <Compile Include="Server\Contract\AuthTemplate.cs" />
+    <Compile Include="Server\Contract\IAlbumServer.cs" />
     <Compile Include="Server\Contract\IServerCommand.cs" />
     <Compile Include="Messages\ChangePage.cs" />
     <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="Server\Services\AlbumServer.cs" />
     <Compile Include="Server\Services\LoginServerCommand.cs" />
     <Compile Include="Server\Services\LoginServer.cs" />
     <Compile Include="Server\Services\SignUpServer.cs" />
@@ -190,6 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\albumIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

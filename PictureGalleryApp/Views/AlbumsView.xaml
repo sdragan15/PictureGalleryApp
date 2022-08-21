@@ -11,28 +11,35 @@
                                               IsDesignTimeCreatable=True}">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <WrapPanel>
-                <WrapPanel.Resources>
-                    <Style TargetType="{x:Type Image}">
-                        <Setter Property="Margin" Value="5" />
-                    </Style>
-                </WrapPanel.Resources>
-
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-                <Image Width="250" Source="/Assets/Images/BlueBackground.png"/>
-            </WrapPanel>
+            <ItemsControl ItemsSource="{Binding AlbumNames}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="10">
+                            <StackPanel Opacity="1" Margin="20" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Width="100" Source="/Assets/Images/albumIcon.png"/>
+                                <Label FontSize="15" Content="{Binding}" HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.BorderBrush" Value="Transparent"/>
+                                    <Setter Property="Border.BorderThickness" Value="3"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="Border.IsMouseOver" Value="True">
+                                            <Setter Property="Border.BorderBrush" Value="Black"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            
         </ScrollViewer>
-        
-
     </Grid>
 </UserControl>

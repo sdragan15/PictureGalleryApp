@@ -13,9 +13,9 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
-            string endpoint = "net.tcp://localhost:10105/PictureGallery";
-            ChannelFactory<IMessageService> factory = new ChannelFactory<IMessageService>(new NetTcpBinding(), endpoint);
-            IMessageService proxy = factory.CreateChannel();
+            string endpoint = "net.tcp://localhost:10105/Albums";
+            ChannelFactory<IAlbumService> factory = new ChannelFactory<IAlbumService>(new NetTcpBinding(), endpoint);
+            IAlbumService proxy = factory.CreateChannel();
 
             string endpointAuth = "net.tcp://localhost:10106/Auth";
             ChannelFactory<IAuthenticationService> factoryAuth = new ChannelFactory<IAuthenticationService>(new NetTcpBinding(), endpointAuth);
@@ -32,7 +32,7 @@ namespace TestClient
                     Console.WriteLine("1 -> Register Admin");
                     Console.WriteLine("2 -> Register User");
                     Console.WriteLine("3 -> Login");
-                    Console.WriteLine("4 -> Send message");
+                    Console.WriteLine("4 -> Get album names");
                     switch (int.Parse(Console.ReadLine()))
                     {
                         case 1:
@@ -58,10 +58,11 @@ namespace TestClient
 
                             break;
                         case 4:
-                            Console.WriteLine("Send some text");
-                            string message = Console.ReadLine();
-                            proxy.SendMessage(message, token);
-                            Console.WriteLine("Message sent\n");
+                            List<string> names = proxy.GetAllNamesForUser("slavko");
+                            foreach(string name in names)
+                            {
+                                Console.WriteLine(name);
+                            }
 
                             break;
                         default:

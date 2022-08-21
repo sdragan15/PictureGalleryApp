@@ -17,7 +17,8 @@ namespace PictureGalleryServer
             AuthenticationServer authenticationServer = new AuthenticationServer();
 
             Context context = new Context();
-            DatabaseService databaseService = new DatabaseService(context);
+            AuthDbService databaseService = new AuthDbService(context);
+            AlbumDbService albumDbService = new AlbumDbService(context);
 
             albumsServer.Open();
             Console.WriteLine("Albums server is open.");

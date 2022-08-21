@@ -11,7 +11,7 @@ namespace Model
     public class AlbumModelDto : DbEntity
     {
         public string Name { get; set; }
-        public UserModelDto User { get; set; }
+        public virtual UserModelDto User { get; set; }
         public List<PictureModelDto> Pictures { get; set; }
         public bool IsPrivate { get; set; }
 

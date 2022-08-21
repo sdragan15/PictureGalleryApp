@@ -13,5 +13,6 @@ namespace Contract
         bool UpdateAlbum(AlbumModelDto album);
         bool DeleteAlbum(int id);
         AlbumModelDto GetAlbum(int id);
+        List<AlbumModelDto> GetAllAlbums();
     }
 }

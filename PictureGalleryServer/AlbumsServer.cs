@@ -19,7 +19,7 @@ namespace PictureGalleryServer
             string endpoint = String.Format("net.tcp://localhost:10105/{0}", endpointName);
             NetTcpBinding binding = new NetTcpBinding();
             serviceHost = new ServiceHost(typeof(AlbumService));
-            serviceHost.AddServiceEndpoint(typeof(IAlbumDbService), binding, endpoint);
+            serviceHost.AddServiceEndpoint(typeof(IAlbumService), binding, endpoint);
         }
 
         public void Open()

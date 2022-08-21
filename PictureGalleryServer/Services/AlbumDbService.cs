@@ -10,6 +10,13 @@ namespace PictureGalleryServer.Services
 {
     public class AlbumDbService : IAlbumDbService
     {
+        private Context _context;
+
+        public AlbumDbService(Context context)
+        {
+            _context = context;
+        }
+
         public bool AddPicture(PictureModelDto picture)
         {
             throw new NotImplementedException();
@@ -33,6 +40,11 @@ namespace PictureGalleryServer.Services
         public AlbumModelDto GetAlbum(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<AlbumModelDto> GetAllAlbums()
+        {
+            return _context.Albums.ToList();
         }
 
         public PictureModelDto GetPicture(int id)

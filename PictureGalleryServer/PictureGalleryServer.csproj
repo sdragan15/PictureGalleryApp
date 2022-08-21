@@ -88,11 +88,16 @@
     <Compile Include="Migrations\202208211501035_Image-data.designer.cs">
       <DependentUpon>202208211501035_Image-data.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208211823028_AlbumsFk.cs" />
+    <Compile Include="Migrations\202208211823028_AlbumsFk.designer.cs">
+      <DependentUpon>202208211823028_AlbumsFk.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Services\AlbumDbService.cs" />
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="Services\DatabaseService.cs" />
+    <Compile Include="Services\AuthDbService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208211501035_Image-data.resx">
       <DependentUpon>202208211501035_Image-data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208211823028_AlbumsFk.resx">
+      <DependentUpon>202208211823028_AlbumsFk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

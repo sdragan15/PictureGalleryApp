@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace PictureGalleryServer.Services
 {
-    public class DatabaseService : IRegisterDbService, IUserDbService
+    public class AuthDbService : IRegisterDbService, IUserDbService
     {
         private Context _context;
 
-        public DatabaseService(Context context)
+        public AuthDbService(Context context)
         {
             _context = context;
         }
 
-        public DatabaseService()
+        public AuthDbService()
         {
         }
 

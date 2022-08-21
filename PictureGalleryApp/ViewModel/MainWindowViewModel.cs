@@ -32,7 +32,7 @@ namespace PictureGalleryApp.ViewModel
         }
 
         [Obsolete("Only for design data", true)]
-        public MainWindowViewModel(): this(new LoginViewModel(), null, null)
+        public MainWindowViewModel(): this(new LoginViewModel(), null, new AlbumsViewModel())
         {
             if (!this.IsInDesignMode)
             {
@@ -45,7 +45,8 @@ namespace PictureGalleryApp.ViewModel
             _signUpViewModel = signUpView;
             _loginViewModel = loginView;
             _albumsViewModel = albumsView;
-            CurrentViewModel = _loginViewModel;
+            //CurrentViewModel = _loginViewModel;
+            CurrentViewModel = _albumsViewModel;
             Messenger.Default.Register<ChangePage>(this, UpdateCurrentView);
         }
 

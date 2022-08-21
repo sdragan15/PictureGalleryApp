@@ -13,11 +13,11 @@ namespace PictureGalleryServer
     public class AuthenticationService : IAutenticationAndAuthorization
     {
         private static string secretKey = "f002c204c@f6(bb942765#826bDfe68affe80!08d6e714cGfb8bf1cd3b20d92c";
-        private DatabaseService _dbService;
+        private AuthDbService _dbService;
 
         public AuthenticationService()
         {
-            _dbService = new DatabaseService(new Context());
+            _dbService = new AuthDbService(new Context());
         }
 
 
