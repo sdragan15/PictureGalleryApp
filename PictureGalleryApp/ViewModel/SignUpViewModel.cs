@@ -38,7 +38,7 @@ namespace PictureGalleryApp.ViewModel
         {
             UpdateViewCommand = new UpdateViewCommand();
             SignUpCommand = new RelayCommand(SignUp);
-            _signUpServer = new SignUpServer(_signUpUri, _signUpBindingModel);
+            _signUpServer = new SignUpService(_signUpUri, _signUpBindingModel);
         }
 
         private void SignUp()

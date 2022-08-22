@@ -1,0 +1,91 @@
+﻿<Window x:Class="PictureGalleryApp.Views.AlbumWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PictureGalleryApp.Views"
+        xmlns:viewModel="clr-namespace:PictureGalleryApp.ViewModel"
+        mc:Ignorable="d"
+        Title="AlbumWindow" Height="500" Width="800"
+        FontSize="15"
+        d:DataContext="{d:DesignInstance viewModel:AlbumWindowViewModel,
+                                         IsDesignTimeCreatable=True}">
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Images/BlueBackground.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" FontWeight="Bold">MyAlbum</Label>
+        
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="3" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl ItemsSource="{Binding Pictures}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="5px" Command="{Binding DataContext.SelectAlbum,
+         RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}">
+                            <StackPanel Opacity="1" Margin="20" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Width="100" Source="/Assets/Images/albumIcon.png"/>
+                                <Label x:Name="nameLabel" FontSize="15" Content="{Binding}" HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+                        </Button>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1" Grid.Column="6" 
+                    Grid.ColumnSpan="2"
+                    Grid.RowSpan="3" 
+                    Margin="10">
+
+            <Label>Name:</Label>
+            <TextBox Text="{Binding PictureBindingModel.Name}"></TextBox>
+            <Label>Tags:</Label>
+            <TextBox Text="{Binding PictureBindingModel.Tags}" TextWrapping="Wrap" Height="100">
+            </TextBox> 
+            <Button
+                Command="{Binding BrowsePicture}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="15"
+                Width="100"
+                Margin="10">Browse
+            </Button>
+            <Button
+                Command="{Binding AddPicture}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="15"
+                Width="100">Add
+            </Button>
+
+        </StackPanel>
+        
+        
+    </Grid>
+</Window>

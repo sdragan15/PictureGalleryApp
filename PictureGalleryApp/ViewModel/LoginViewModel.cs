@@ -42,7 +42,7 @@ namespace PictureGalleryApp.ViewModel
             UpdateViewCommand = new UpdateViewCommand();
             LoginCommand = new RelayCommand(Login);
             LoginServerCommand = new LoginServerCommand(_loginUri, LoginBindingModel);
-            _loginServer = new LoginServer(_loginUri, LoginBindingModel);
+            _loginServer = new LoginService(_loginUri, LoginBindingModel);
         }
 
         //With parameter constructor
@@ -50,6 +50,7 @@ namespace PictureGalleryApp.ViewModel
         //{
 
         //}
+
 
         private void Login()
         {

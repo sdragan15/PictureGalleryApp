@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace PictureGalleryApp.Server.Services
 {
-    public class SignUpServer : AuthTemplate
+    public class LoginService : AuthTemplate
     {
-        private SignUpModel _signUpModel;
+        private LoginModel _loginModel;
         private IAuthenticationService proxy;
 
-        public SignUpServer(string url, SignUpModel loginModel)
+        public LoginService(string url, LoginModel loginModel)
         {
             endpoint = url;
-            _signUpModel = loginModel;
+            _loginModel = loginModel;
 
         }
 
@@ -27,14 +27,14 @@ namespace PictureGalleryApp.Server.Services
         {
             try
             {
-                ChannelFactory<IAuthenticationService> channelFactory =
+                ChannelFactory<IAuthenticationService> channelFactory = 
                     new ChannelFactory<IAuthenticationService>(new NetTcpBinding(), endpoint);
                 proxy = channelFactory.CreateChannel();
             }
             catch (Exception ex)
             {
                 throw (ex);
-
+                
             }
         }
 
@@ -43,11 +43,14 @@ namespace PictureGalleryApp.Server.Services
         {
             try
             {
-                bool registered = proxy.RegisterUser(Map(_signUpModel));
-                if (!registered)
+                string token = proxy.Login(Map(_loginModel));
+                if (token == "")
                 {
-                    throw new Exception("User is not registered");
+                    throw new Exception("Token is not received");
                 }
+                Properties.Settings.Default.Token = token;
+                Console.WriteLine(token);
+
             }
             catch (Exception ex)
             {
@@ -56,24 +59,12 @@ namespace PictureGalleryApp.Server.Services
             }
         }
 
-        private LoginModelDto Map(LoginModel model)
+        private LoginModelDto Map(LoginModel loginModel)
         {
             LoginModelDto result = new LoginModelDto();
 
-            result.Username = model.Username;
-            result.Password = model.Password;
-
-            return result;
-        }
-
-        private RegisterModelDto Map(SignUpModel model)
-        {
-            RegisterModelDto result = new RegisterModelDto();
-
-            result.Username = model.Username;
-            result.Password = model.Password;
-            result.Lastname = model.Lastname;
-            result.Name = model.Name;
+            result.Username = loginModel.Username;
+            result.Password = loginModel.Password;
 
             return result;
         }

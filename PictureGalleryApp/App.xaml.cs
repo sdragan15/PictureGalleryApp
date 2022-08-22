@@ -4,6 +4,7 @@ using PictureGalleryApp.Contract;
 using PictureGalleryApp.Server.Contract;
 using PictureGalleryApp.Server.Services;
 using PictureGalleryApp.ViewModel;
+using PictureGalleryApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,9 +30,11 @@ namespace PictureGalleryApp
             container.Register(Component.For<LoginViewModel>());
             container.Register(Component.For<SignUpViewModel>());
             container.Register(Component.For<MainWindowViewModel>());
+            container.Register(Component.For<AlbumWindowViewModel>());
             container.Register(Component.For<MainWindow>());
-            container.Register(Component.For<AuthTemplate>().ImplementedBy<LoginServer>());
-            container.Register(Component.For<IAlbumServer>().ImplementedBy<AlbumServer>());
+            container.Register(Component.For<AlbumWindow>());
+            container.Register(Component.For<AuthTemplate>().ImplementedBy<LoginService>());
+            container.Register(Component.For<IAlbumAppService>().ImplementedBy<AlbumService>());
 
 
             var mainWindow = container.Resolve<MainWindow>();

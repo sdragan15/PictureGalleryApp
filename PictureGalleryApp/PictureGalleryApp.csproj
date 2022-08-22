@@ -102,22 +102,28 @@
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\MyICommand.cs" />
     <Compile Include="Commands\UpdateViewCommand.cs" />
+    <Compile Include="Model\PictureModel.cs" />
     <Compile Include="Model\SignUpModel.cs" />
     <Compile Include="Server\Contract\AuthTemplate.cs" />
-    <Compile Include="Server\Contract\IAlbumServer.cs" />
+    <Compile Include="Server\Contract\IAlbumAppService.cs" />
+    <Compile Include="Server\Contract\IPictureService.cs" />
     <Compile Include="Server\Contract\IServerCommand.cs" />
     <Compile Include="Messages\ChangePage.cs" />
     <Compile Include="Model\LoginModel.cs" />
-    <Compile Include="Server\Services\AlbumServer.cs" />
+    <Compile Include="Server\Services\AlbumService.cs" />
     <Compile Include="Server\Services\LoginServerCommand.cs" />
-    <Compile Include="Server\Services\LoginServer.cs" />
-    <Compile Include="Server\Services\SignUpServer.cs" />
+    <Compile Include="Server\Services\LoginService.cs" />
+    <Compile Include="Server\Services\SignUpService.cs" />
     <Compile Include="ViewModel\AlbumsViewModel.cs" />
+    <Compile Include="ViewModel\AlbumWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\SignUpViewModel.cs" />
     <Compile Include="Views\AlbumsView.xaml.cs">
       <DependentUpon>AlbumsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AlbumWindow.xaml.cs">
+      <DependentUpon>AlbumWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -138,6 +144,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\AlbumsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AlbumWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
