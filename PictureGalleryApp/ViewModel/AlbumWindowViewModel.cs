@@ -2,8 +2,10 @@
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using PictureGalleryApp.Model;
+using PictureGalleryApp.Server.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +17,13 @@ namespace PictureGalleryApp.ViewModel
     {
         public ICommand AddPicture { get; set; }
         public ICommand BrowsePicture { get; set; }
+        public ICommand GetPictures { get; set; }
 
+        public ObservableCollection<PictureModel> Pictures { get; set; }
         private PictureModel _pictureBindingModel;
         private string _albumId;
+        private AlbumService _albumService;
+
 
         public PictureModel PictureBindingModel
         {
@@ -30,23 +36,38 @@ namespace PictureGalleryApp.ViewModel
 
         public AlbumWindowViewModel()
         {
+            _albumService = new AlbumService();
             AddPicture = new RelayCommand(AddPictureToServer);
             BrowsePicture = new RelayCommand(BrowsePictureDialog);
+            GetPictures = new RelayCommand<int>(GetAlbumPictures);
             PictureBindingModel = new PictureModel() { Name="Hello", Date = DateTime.Now, Tags="asgj i;sdga", Raiting = 4.9};
+            Pictures = new ObservableCollection<PictureModel>()
+            {
+                {new PictureModel() { Name="Jeff"} }
+            };
         }
 
         public void SetAlbumId(string id)
         {
             _albumId = id;
+            Pictures.Clear();
+            GetAlbumPictures(12);
         }
 
-        private void AddPictureToServer()
+        private async void AddPictureToServer()
         {
-            Console.WriteLine(PictureBindingModel.Name);
-            Console.WriteLine(PictureBindingModel.Tags);
-            Console.WriteLine(PictureBindingModel.Url);
-            Console.WriteLine(PictureBindingModel.Raiting);
-            Console.WriteLine(PictureBindingModel.Date);
+            await _albumService.AddPictureToServer(PictureBindingModel);
+        }
+
+        private async void GetAlbumPictures(int albumId)
+        {
+            Console.WriteLine("Radiii ---------- broo");
+            List<PictureModel> res = await _albumService.GetAllPicturesForAlbum(12);
+            foreach (PictureModel picture in res)
+            {
+                Pictures.Add(picture);
+            }
+            Pictures.Add(new PictureModel() { Name = "Hrkkkk" });
         }
 
         private void GetAlbumDetails()

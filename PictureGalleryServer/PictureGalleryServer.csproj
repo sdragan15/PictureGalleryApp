@@ -92,6 +92,18 @@
     <Compile Include="Migrations\202208211823028_AlbumsFk.designer.cs">
       <DependentUpon>202208211823028_AlbumsFk.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208231922512_PictureModelChanged.cs" />
+    <Compile Include="Migrations\202208231922512_PictureModelChanged.designer.cs">
+      <DependentUpon>202208231922512_PictureModelChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208231930339_InitList.cs" />
+    <Compile Include="Migrations\202208231930339_InitList.designer.cs">
+      <DependentUpon>202208231930339_InitList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208232023315_virtualPictureId.cs" />
+    <Compile Include="Migrations\202208232023315_virtualPictureId.designer.cs">
+      <DependentUpon>202208232023315_virtualPictureId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\AlbumDbService.cs" />
     <Compile Include="Services\AlbumService.cs" />
@@ -144,6 +156,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208211823028_AlbumsFk.resx">
       <DependentUpon>202208211823028_AlbumsFk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208231922512_PictureModelChanged.resx">
+      <DependentUpon>202208231922512_PictureModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208231930339_InitList.resx">
+      <DependentUpon>202208231930339_InitList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208232023315_virtualPictureId.resx">
+      <DependentUpon>202208232023315_virtualPictureId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

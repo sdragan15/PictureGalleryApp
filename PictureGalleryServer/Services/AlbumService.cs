@@ -18,12 +18,23 @@ namespace PictureGalleryServer.Services
             _albumDbService = new AlbumDbService(new Context());
         }
 
+        public bool AddPicture(PictureModelDto picture)
+        {
+            Console.WriteLine("Adding picture...");
+            return _albumDbService.AddPicture(picture);
+        }
+
         public bool CreateAlbum(AlbumModelDto album)
         {
             throw new NotImplementedException();
         }
 
         public bool DeleteAlbum(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeletePicture(int id)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +65,22 @@ namespace PictureGalleryServer.Services
             return result;
         }
 
+        public List<PictureModelDto> GetAllPictureForAlbum(int id)
+        {
+            return _albumDbService.GetAllPicturesForAlbum(id);
+        }
+
+        public PictureModelDto GetPicture(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool UpdateAlbum(AlbumModelDto album)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdatePicture(PictureModelDto picture)
         {
             throw new NotImplementedException();
         }

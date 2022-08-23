@@ -12,12 +12,13 @@ namespace Model
     {
         public string Name { get; set; }
         public virtual UserModelDto User { get; set; }
-        public List<PictureModelDto> Pictures { get; set; }
+        public virtual List<PictureModelDto> Pictures { get; set; }
         public bool IsPrivate { get; set; }
 
         public AlbumModelDto()
         {
             IsDeleted = false;
+            Pictures = new List<PictureModelDto>();
         }
     }
 }

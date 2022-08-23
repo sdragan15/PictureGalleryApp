@@ -16,6 +16,7 @@ namespace Model
         public string Tags { get; set; }
         public double Rating { get; set; }
         public byte[] ImageData { get; set; }
+        public int AlbumId { get; set; }
 
         public PictureModelDto()
         {

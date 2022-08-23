@@ -19,7 +19,15 @@ namespace PictureGalleryServer.Services
 
         public bool AddPicture(PictureModelDto picture)
         {
-            throw new NotImplementedException();
+            AlbumModelDto album = _context.Albums.FirstOrDefault(x => x.Id == picture.AlbumId);
+            if (album == null)
+            {
+                return false;
+            }
+
+            album.Pictures.Add(picture);
+            _context.SaveChanges();
+            return true;
         }
 
         public bool CreateAlbum(AlbumModelDto album)
@@ -45,6 +53,18 @@ namespace PictureGalleryServer.Services
         public List<AlbumModelDto> GetAllAlbums()
         {
             return _context.Albums.ToList();
+        }
+
+        public List<PictureModelDto> GetAllPicturesForAlbum(int id)
+        {
+            AlbumModelDto album = _context.Albums.FirstOrDefault(x => x.Id == id);
+
+            if(album == null)
+            {
+                return null;
+            }
+
+            return album.Pictures;
         }
 
         public PictureModelDto GetPicture(int id)

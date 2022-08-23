@@ -72,6 +72,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
@@ -106,7 +107,6 @@
     <Compile Include="Model\SignUpModel.cs" />
     <Compile Include="Server\Contract\AuthTemplate.cs" />
     <Compile Include="Server\Contract\IAlbumAppService.cs" />
-    <Compile Include="Server\Contract\IPictureService.cs" />
     <Compile Include="Server\Contract\IServerCommand.cs" />
     <Compile Include="Messages\ChangePage.cs" />
     <Compile Include="Model\LoginModel.cs" />

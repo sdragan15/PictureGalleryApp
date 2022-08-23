@@ -23,5 +23,15 @@ namespace Contract
         List<AlbumModelDto> GetAllAlbums();
         [OperationContract]
         List<string> GetAllNamesForUser(string username);
+        [OperationContract]
+        bool AddPicture(PictureModelDto picture);
+        [OperationContract]
+        bool DeletePicture(int id);
+        [OperationContract]
+        bool UpdatePicture(PictureModelDto picture);
+        [OperationContract]
+        PictureModelDto GetPicture(int id);
+        [OperationContract]
+        List<PictureModelDto> GetAllPictureForAlbum(int id);
     }
 }

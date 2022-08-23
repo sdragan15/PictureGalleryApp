@@ -58,7 +58,6 @@
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="IAuthorizationService.cs" />
     <Compile Include="IMessageService.cs" />
-    <Compile Include="Database\IPictureDbService.cs" />
     <Compile Include="Database\IRegisterDbService.cs" />
     <Compile Include="Database\IUserDbService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
