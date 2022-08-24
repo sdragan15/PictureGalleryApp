@@ -17,6 +17,12 @@ namespace PictureGalleryServer.Services
             _context = context;
         }
 
+        public void AddAlbum(AlbumModelDto album)
+        {
+            _context.Albums.Add(album);
+            _context.SaveChanges();
+        }
+
         public bool AddPicture(PictureModelDto picture)
         {
             AlbumModelDto album = _context.Albums.FirstOrDefault(x => x.Id == picture.AlbumId);
@@ -37,7 +43,17 @@ namespace PictureGalleryServer.Services
 
         public bool DeleteAlbum(int id)
         {
-            throw new NotImplementedException();
+            AlbumModelDto album = GetAlbum(id);
+
+            foreach (PictureModelDto picture in album.Pictures)
+            {
+                picture.IsDeleted = true;
+            }
+
+            album.IsDeleted = true;
+            _context.SaveChanges();
+
+            return true;
         }
 
         public bool DeletePicture(int id)
@@ -47,17 +63,17 @@ namespace PictureGalleryServer.Services
 
         public AlbumModelDto GetAlbum(int id)
         {
-            throw new NotImplementedException();
+            return _context.Albums.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
         }
 
         public List<AlbumModelDto> GetAllAlbums()
         {
-            return _context.Albums.ToList();
+            return _context.Albums.Where(x => x.IsDeleted == false).ToList();
         }
 
         public List<PictureModelDto> GetAllPicturesForAlbum(int id)
         {
-            AlbumModelDto album = _context.Albums.FirstOrDefault(x => x.Id == id);
+            AlbumModelDto album = _context.Albums.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
 
             if(album == null)
             {

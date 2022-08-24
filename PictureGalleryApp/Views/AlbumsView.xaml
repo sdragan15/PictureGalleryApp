@@ -7,29 +7,60 @@
              xmlns:viewModel="clr-namespace:PictureGalleryApp.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
+             FontSize="15"
              d:DataContext="{d:DesignInstance viewModel:AlbumsViewModel,
                                               IsDesignTimeCreatable=True}">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <ItemsControl ItemsSource="{Binding AlbumNames}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Margin="5px" Command="{Binding DataContext.SelectAlbum,
-         RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding Id}">
-                            <StackPanel Opacity="1" Margin="20" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Image Width="100" Source="/Assets/Images/albumIcon.png"/>
-                                <Label x:Name="nameLabel" FontSize="15" Content="{Binding Name}" HorizontalAlignment="Center"></Label>
-                            </StackPanel>
-                        </Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            
+        </Grid.RowDefinitions>
 
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </ScrollViewer>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="2">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding AlbumNames}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Margin="5px" Command="{Binding DataContext.SelectAlbum,
+         RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding Id}">
+                                <StackPanel Opacity="1" Margin="20" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Image Width="100" Source="/Assets/Images/albumIcon.png"/>
+                                    <Label x:Name="nameLabel" FontSize="15" Content="{Binding Name}" HorizontalAlignment="Center"></Label>
+                                </StackPanel>
+                            </Button>
+
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="0" Grid.Column="2" 
+                    Margin="10"
+                    VerticalAlignment="Center">
+
+            <Label>Name:</Label>
+            <TextBox Text="{Binding Album.Name}"></TextBox>
+            <CheckBox HorizontalAlignment="Center"
+                      Margin="10"
+                      IsChecked="{Binding Album.IsPrivate}">Is Private</CheckBox>
+            <Button
+                Command="{Binding AddAlbum}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="15"
+                Width="100">Add
+            </Button>
+
+        </StackPanel>
     </Grid>
 </UserControl>

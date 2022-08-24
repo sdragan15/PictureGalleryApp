@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace PictureGalleryApp.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool IsPrivate { get; set; }
+        public UserModelDto User { get; set; }
     }
 }

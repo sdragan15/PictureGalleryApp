@@ -9,6 +9,7 @@ namespace Contract
 {
     public interface IAlbumDbService
     {
+        void AddAlbum(AlbumModelDto album);
         bool CreateAlbum(AlbumModelDto album);
         bool UpdateAlbum(AlbumModelDto album);
         bool DeleteAlbum(int id);

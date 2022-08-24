@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PictureGalleryApp.ViewModel
@@ -18,6 +19,8 @@ namespace PictureGalleryApp.ViewModel
         public ICommand AddPicture { get; set; }
         public ICommand BrowsePicture { get; set; }
         public ICommand GetPictures { get; set; }
+        public ICommand DeleteAlbumCommand { get;set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         public ObservableCollection<PictureModel> Pictures { get; set; }
         private PictureModel _pictureBindingModel;
@@ -42,6 +45,13 @@ namespace PictureGalleryApp.ViewModel
             GetPictures = new RelayCommand<int>(GetAlbumPictures);
             PictureBindingModel = new PictureModel() { Name="Hello", Date = DateTime.Now, Tags="asgj i;sdga", Raiting = 4.9};
             Pictures = new ObservableCollection<PictureModel>();
+            DeleteAlbumCommand = new RelayCommand<Window>(DeleteAlbum);
+        }
+
+        public async void DeleteAlbum(Window window)
+        {
+            await _albumService.DeleteAlbum(_albumId);
+            window.Close();
         }
 
         public void SetAlbumId(int id)
@@ -55,6 +65,8 @@ namespace PictureGalleryApp.ViewModel
         {
             PictureBindingModel.AlbumId = _albumId;
             await _albumService.AddPictureToServer(PictureBindingModel);
+            Pictures.Clear();
+            GetAlbumPictures(_albumId);
         }
 
         private async void GetAlbumPictures(int albumId)

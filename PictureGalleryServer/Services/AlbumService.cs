@@ -12,10 +12,18 @@ namespace PictureGalleryServer.Services
     public class AlbumService : IAlbumService
     {
         private IAlbumDbService _albumDbService;
+        private IUserDbService _userDbService;
 
         public AlbumService()
         {
+            _userDbService = new UserDbService(new Context());
             _albumDbService = new AlbumDbService(new Context());
+        }
+
+        public void AddAlbum(AlbumModelDto album)
+        {
+            album.User = _userDbService.GetUserByUsername(album.User.Username);
+            _albumDbService.AddAlbum(album);
         }
 
         public bool AddPicture(PictureModelDto picture)
@@ -31,7 +39,7 @@ namespace PictureGalleryServer.Services
 
         public bool DeleteAlbum(int id)
         {
-            throw new NotImplementedException();
+            return _albumDbService.DeleteAlbum(id);
         }
 
         public bool DeletePicture(int id)

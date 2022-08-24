@@ -168,6 +168,62 @@ namespace PictureGalleryApp.Server.Services
             return result;
         }
 
+        public async Task<bool> AddAlbum(AlbumModel album)
+        {
+            bool success = true;
 
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    _proxy.AddAlbum(ConvertToDto(album));
+
+                }
+                catch (Exception ex)
+                {
+                    success = false;
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return success;
+        }
+
+        private AlbumModelDto ConvertToDto(AlbumModel album)
+        {
+            return new AlbumModelDto()
+            {
+                Name = album.Name,
+                IsPrivate = album.IsPrivate,
+                User = album.User,
+            };
+        }
+
+        public async Task<bool> DeleteAlbum(int id)
+        {
+            bool success = true;
+
+            Task task = new Task(() => {
+                try
+                {
+                    Connect();
+                    _proxy.DeleteAlbum(id);
+
+                }
+                catch (Exception ex)
+                {
+                    success = false;
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+            return success;
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace Contract
     public interface IAlbumService
     {
         [OperationContract]
+        void AddAlbum(AlbumModelDto album);
+        [OperationContract]
         bool CreateAlbum(AlbumModelDto album);
         [OperationContract]
         bool UpdateAlbum(AlbumModelDto album);
