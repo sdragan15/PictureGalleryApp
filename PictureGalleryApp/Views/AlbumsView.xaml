@@ -15,10 +15,10 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Margin="5px" Command="{Binding DataContext.SelectAlbum,
-         RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}">
+         RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding Id}">
                             <StackPanel Opacity="1" Margin="20" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Image Width="100" Source="/Assets/Images/albumIcon.png"/>
-                                <Label x:Name="nameLabel" FontSize="15" Content="{Binding}" HorizontalAlignment="Center"></Label>
+                                <Label x:Name="nameLabel" FontSize="15" Content="{Binding Name}" HorizontalAlignment="Center"></Label>
                             </StackPanel>
                         </Button>
 

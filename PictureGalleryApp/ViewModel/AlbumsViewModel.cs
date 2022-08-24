@@ -20,20 +20,12 @@ namespace PictureGalleryApp.ViewModel
 {
     public class AlbumsViewModel: ViewModelBase
     {
+        public ObservableCollection<AlbumModel> AlbumNames { get; set; }
+
         private AlbumWindow _albumWindow;
         private AlbumWindowViewModel _albumWindowViewModel;
-        private ObservableCollection<string> _albumNames;
         private IAlbumAppService _albumServer;
         public ICommand SelectAlbum { get; set; }
-
-        public ObservableCollection<string> AlbumNames
-        {
-            get { return _albumNames; }
-            set
-            {
-                Set(ref _albumNames, value);
-            }
-        }
 
 
         [Obsolete("Only for design data", true)]
@@ -45,24 +37,23 @@ namespace PictureGalleryApp.ViewModel
         public AlbumsViewModel(IAlbumAppService album, AlbumWindowViewModel albumWindowViewModel)
         {
             _albumWindowViewModel = albumWindowViewModel;
-            SelectAlbum = new RelayCommand<string>(OpenAlbum);
+            SelectAlbum = new RelayCommand<int>(OpenAlbum);
             _albumServer = album;
-            AlbumNames = new ObservableCollection<string>() {};
-            SetAlbumNames();
+            AlbumNames = new ObservableCollection<AlbumModel>();
         }
 
-        private void OpenAlbum(string param)
+        private void OpenAlbum(int param)
         {
             _albumWindowViewModel.SetAlbumId(param);
             _albumWindow = new AlbumWindow(_albumWindowViewModel);
             _albumWindow.ShowDialog();
         }
 
-        private async void SetAlbumNames()
+        public async void GetAlbumsForUser(string username)
         {
            
-            List<string> names = await _albumServer.GetAllAlbumNamesForUser("slavko");
-            foreach (string name in names)
+            List<AlbumModel> names = await _albumServer.GetAllAlbumsForUser(username);
+            foreach (AlbumModel name in names)
             {
                 AlbumNames.Add(name);
             }

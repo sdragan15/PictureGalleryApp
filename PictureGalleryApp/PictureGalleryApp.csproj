@@ -103,6 +103,7 @@
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\MyICommand.cs" />
     <Compile Include="Commands\UpdateViewCommand.cs" />
+    <Compile Include="Model\AlbumModel.cs" />
     <Compile Include="Model\PictureModel.cs" />
     <Compile Include="Model\SignUpModel.cs" />
     <Compile Include="Server\Contract\AuthTemplate.cs" />

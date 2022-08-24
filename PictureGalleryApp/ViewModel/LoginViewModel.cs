@@ -21,6 +21,7 @@ namespace PictureGalleryApp.ViewModel
         public ICommand UpdateViewCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public IServerCommand LoginServerCommand { get; set; }
+        private AlbumsViewModel _albumViewModel;
 
         private LoginModel _loginBindingModel = new LoginModel();
         private string _loginUri = "net.tcp://localhost:10106/Auth";
@@ -39,22 +40,25 @@ namespace PictureGalleryApp.ViewModel
         //[Obsolete("Only for design data", true)]
         public LoginViewModel()
         {
+            
+        }
+
+        
+        public LoginViewModel(AlbumsViewModel albumsViewModel)
+        {
+            _albumViewModel = albumsViewModel;
             UpdateViewCommand = new UpdateViewCommand();
             LoginCommand = new RelayCommand(Login);
             LoginServerCommand = new LoginServerCommand(_loginUri, LoginBindingModel);
             _loginServer = new LoginService(_loginUri, LoginBindingModel);
         }
 
-        //With parameter constructor
-        //public LoginViewModel()
-        //{
 
-        //}
-
-
-        private void Login()
+        private async void Login()
         {
-            Thread thread = new Thread(() =>
+            bool IsLoggedIn = false;
+
+            Task task = new Task(() =>
             {
                 if (!_loginServer.Run())
                 {
@@ -62,10 +66,19 @@ namespace PictureGalleryApp.ViewModel
                 }
                 else
                 {
+                    IsLoggedIn = true;
                     UpdateViewCommand.Execute("loggedin");
                 }
             });
-            thread.Start();
+
+            task.Start();
+
+            await task;
+
+            if (IsLoggedIn)
+            {
+                _albumViewModel.GetAlbumsForUser(LoginBindingModel.Username);
+            }
         }
 
         //private void Login()

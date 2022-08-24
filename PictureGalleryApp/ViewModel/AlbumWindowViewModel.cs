@@ -21,7 +21,7 @@ namespace PictureGalleryApp.ViewModel
 
         public ObservableCollection<PictureModel> Pictures { get; set; }
         private PictureModel _pictureBindingModel;
-        private string _albumId;
+        private int _albumId;
         private AlbumService _albumService;
 
 
@@ -41,33 +41,29 @@ namespace PictureGalleryApp.ViewModel
             BrowsePicture = new RelayCommand(BrowsePictureDialog);
             GetPictures = new RelayCommand<int>(GetAlbumPictures);
             PictureBindingModel = new PictureModel() { Name="Hello", Date = DateTime.Now, Tags="asgj i;sdga", Raiting = 4.9};
-            Pictures = new ObservableCollection<PictureModel>()
-            {
-                {new PictureModel() { Name="Jeff"} }
-            };
+            Pictures = new ObservableCollection<PictureModel>();
         }
 
-        public void SetAlbumId(string id)
+        public void SetAlbumId(int id)
         {
             _albumId = id;
             Pictures.Clear();
-            GetAlbumPictures(12);
+            GetAlbumPictures(_albumId);
         }
 
         private async void AddPictureToServer()
         {
+            PictureBindingModel.AlbumId = _albumId;
             await _albumService.AddPictureToServer(PictureBindingModel);
         }
 
         private async void GetAlbumPictures(int albumId)
         {
-            Console.WriteLine("Radiii ---------- broo");
-            List<PictureModel> res = await _albumService.GetAllPicturesForAlbum(12);
+            List<PictureModel> res = await _albumService.GetAllPicturesForAlbum(albumId);
             foreach (PictureModel picture in res)
             {
                 Pictures.Add(picture);
             }
-            Pictures.Add(new PictureModel() { Name = "Hrkkkk" });
         }
 
         private void GetAlbumDetails()

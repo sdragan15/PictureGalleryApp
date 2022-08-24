@@ -22,7 +22,7 @@ namespace Contract
         [OperationContract]
         List<AlbumModelDto> GetAllAlbums();
         [OperationContract]
-        List<string> GetAllNamesForUser(string username);
+        List<AlbumModelDto> GetAllAlbumsForUser(string username);
         [OperationContract]
         bool AddPicture(PictureModelDto picture);
         [OperationContract]

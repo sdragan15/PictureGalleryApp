@@ -104,6 +104,10 @@
     <Compile Include="Migrations\202208232023315_virtualPictureId.designer.cs">
       <DependentUpon>202208232023315_virtualPictureId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208241614293_PictureUrl.cs" />
+    <Compile Include="Migrations\202208241614293_PictureUrl.designer.cs">
+      <DependentUpon>202208241614293_PictureUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\AlbumDbService.cs" />
     <Compile Include="Services\AlbumService.cs" />
@@ -165,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208232023315_virtualPictureId.resx">
       <DependentUpon>202208232023315_virtualPictureId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208241614293_PictureUrl.resx">
+      <DependentUpon>202208241614293_PictureUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

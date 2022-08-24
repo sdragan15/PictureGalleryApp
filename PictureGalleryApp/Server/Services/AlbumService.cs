@@ -50,16 +50,20 @@ namespace PictureGalleryApp.Server.Services
             return true;
         }
 
-        public async Task<List<string>> GetAllAlbumNamesForUser(string username)
+        public async Task<List<AlbumModel>> GetAllAlbumsForUser(string username)
         {
-            List<string> result = new List<string>();
-
+            List<AlbumModel> result = new List<AlbumModel>();
+            List<AlbumModelDto> resultDto = new List<AlbumModelDto>();
             Task task = new Task(() =>
             {
                 try
                 {
                     Connect();
-                    result = _proxy.GetAllNamesForUser(username);
+                    resultDto = _proxy.GetAllAlbumsForUser(username);
+                    foreach (AlbumModelDto album in resultDto)
+                    {
+                        result.Add(ConvertFromDto(album));
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -67,12 +71,21 @@ namespace PictureGalleryApp.Server.Services
                 }
             });
 
-            //task.Start();
-            //await task;
+            task.Start();
+            await task;
 
-            //return result;
+            return result;
+        }
 
-            return new List<string> { "hello", "broo", "Wup" };
+        private AlbumModel ConvertFromDto(AlbumModelDto album)
+        {
+            AlbumModel result = new AlbumModel()
+            {
+                Name = album.Name,
+                Id = album.Id,
+            };
+
+            return result;
         }
 
         private PictureModelDto ConvertToDto(PictureModel picture)
@@ -82,10 +95,10 @@ namespace PictureGalleryApp.Server.Services
                 Id = picture.Id,
                 Name = picture.Name,
                 Date = picture.Date,
-                ImageData = GetBitMap(picture.Url),
+                ImageUrl = picture.Url,
                 Rating = picture.Raiting,
                 Tags = picture.Tags,
-                AlbumId = 12,
+                AlbumId = picture.AlbumId,
             };
         }
 
@@ -95,75 +108,22 @@ namespace PictureGalleryApp.Server.Services
             {
                 Id = picture.Id,
                 Name = picture.Name,
-                ImageBit = picture.ImageData,
+                Url = picture.ImageUrl,
                 Date = picture.Date,
                 Tags = picture.Tags,
                 AlbumId= picture.AlbumId,
                 Raiting = picture.Rating,
-                ImageBitmap = (BitmapSource)new ImageSourceConverter().ConvertFrom(picture.ImageData)
-            //ImageBitmap = ConvertToBitmapImage(picture.ImageData)
             };
         }
 
-        private BitmapImage ConvertToBitmapImage(byte[] image)
-        {
-            using (var ms = new System.IO.MemoryStream(image))
-            {
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad; // here
-                bitmapImage.StreamSource = ms;
-                bitmapImage.EndInit();
-                return bitmapImage;
-            }
-        }
-
-        private byte[] GetBitMap(string url)
-        {
-            byte[] imagebytes;
-            using (var webClient = new WebClient())
-            {
-                imagebytes = webClient.DownloadData(url);
-            }
-
-            return Resize2Max50Kbytes(imagebytes);
-        }
-
-        private byte[] Resize2Max50Kbytes(byte[] byteImageIn)
-        {
-            byte[] currentByteImageArray = byteImageIn;
-            double scale = 1f;
-
-            MemoryStream inputMemoryStream = new MemoryStream(byteImageIn);
-            Image fullsizeImage = Image.FromStream(inputMemoryStream);
-
-            while (currentByteImageArray.Length > 50000)
-            {
-                Bitmap fullSizeBitmap = new Bitmap(fullsizeImage, new Size((int)(fullsizeImage.Width * scale), (int)(fullsizeImage.Height * scale)));
-                MemoryStream resultStream = new MemoryStream();
-
-                fullSizeBitmap.Save(resultStream, fullsizeImage.RawFormat);
-
-                currentByteImageArray = resultStream.ToArray();
-                resultStream.Dispose();
-                resultStream.Close();
-
-                scale -= 0.05f;
-            }
-
-            return currentByteImageArray;
-        }
 
         public void Connect()
         {
             try
             {
                 NetTcpBinding netTcpBinding = new NetTcpBinding();
-                netTcpBinding.MaxReceivedMessageSize = int.MaxValue;
-                netTcpBinding.MaxBufferPoolSize = int.MaxValue;
-                netTcpBinding.MaxBufferSize = int.MaxValue;
-                ChannelFactory<global::Contract.IAlbumService> channelFactory =
-                    new ChannelFactory<global::Contract.IAlbumService>(netTcpBinding, _endpoint);
+                ChannelFactory<IAlbumService> channelFactory =
+                    new ChannelFactory<IAlbumService>(netTcpBinding, _endpoint);
                 _proxy = channelFactory.CreateChannel();
             }
             catch (Exception ex)
@@ -183,10 +143,18 @@ namespace PictureGalleryApp.Server.Services
                 {
                     Connect();
                     List<PictureModelDto> resultDto = _proxy.GetAllPictureForAlbum(id);
-                    foreach(PictureModelDto picture in resultDto)
+                    if (resultDto == null || resultDto.Count == 0)
                     {
-                        result.Add(ConvertFromDto(picture));
+                        result = new List<PictureModel>();
                     }
+                    else
+                    {
+                        foreach (PictureModelDto picture in resultDto)
+                        {
+                            result.Add(ConvertFromDto(picture));
+                        }
+                    }
+                    
                 }
                 catch (Exception ex)
                 {

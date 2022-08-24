@@ -49,20 +49,21 @@ namespace PictureGalleryServer.Services
             return _albumDbService.GetAllAlbums();
         }
 
-        public List<string> GetAllNamesForUser(string username)
+        public List<AlbumModelDto> GetAllAlbumsForUser(string username)
         {
+            List<AlbumModelDto> res = new List<AlbumModelDto>();
+
             List<AlbumModelDto> albums = 
                 _albumDbService.GetAllAlbums()
                     .Where(x => x.User.Username.Equals(username))
                     .ToList();
 
-            List<string> result = new List<string>();
             foreach(AlbumModelDto album in albums)
             {
-                result.Add(album.Name);
+                res.Add(new AlbumModelDto() { Name = album.Name, Id = album.Id, User = album.User, Pictures = album.Pictures, IsDeleted = album.IsDeleted, IsPrivate = album.IsPrivate});
             }
 
-            return result;
+            return res;
         }
 
         public List<PictureModelDto> GetAllPictureForAlbum(int id)

@@ -45,8 +45,8 @@ namespace PictureGalleryApp.ViewModel
             _signUpViewModel = signUpView;
             _loginViewModel = loginView;
             _albumsViewModel = albumsView;
-            //CurrentViewModel = _loginViewModel;
-            CurrentViewModel = _albumsViewModel;
+            CurrentViewModel = _loginViewModel;
+            //CurrentViewModel = _albumsViewModel;
             Messenger.Default.Register<ChangePage>(this, UpdateCurrentView);
         }
 
