@@ -22,6 +22,7 @@ namespace PictureGalleryApp.ViewModel
     public class AlbumsViewModel: ViewModelBase
     {
         public ObservableCollection<AlbumModel> AlbumNames { get; set; }
+        public ObservableCollection<AlbumModel> AllAlbumNames { get; set; }
         public ICommand SelectAlbum { get; set; }
         public ICommand AddAlbum { get; set; }
 
@@ -29,8 +30,20 @@ namespace PictureGalleryApp.ViewModel
         private AlbumWindow _albumWindow;
         private AlbumWindowViewModel _albumWindowViewModel;
         private IAlbumAppService _albumServer;
-        private string _username;
+        private string _username = "";
+        private bool _showAll;
         
+        public bool ShowAll
+        {
+            get
+            {
+                return _showAll;
+            }
+            set
+            {
+                Set(ref _showAll, value);
+            }
+        }
 
         public AlbumModel Album
         {
@@ -49,12 +62,14 @@ namespace PictureGalleryApp.ViewModel
 
         public AlbumsViewModel(IAlbumAppService album, AlbumWindowViewModel albumWindowViewModel)
         {
+            ShowAll = true;
             Album = new AlbumModel();
             _albumWindowViewModel = albumWindowViewModel;
             SelectAlbum = new RelayCommand<int>(OpenAlbum);
             AddAlbum = new RelayCommand(AddAlbumToUser);
             _albumServer = album;
             AlbumNames = new ObservableCollection<AlbumModel>();
+            AllAlbumNames = new ObservableCollection<AlbumModel>();
         }
 
         private void OpenAlbum(int param)
@@ -67,12 +82,34 @@ namespace PictureGalleryApp.ViewModel
 
         public async void GetAlbumsForUser(string username)
         {
-            AlbumNames.Clear();
-            List<AlbumModel> names = await _albumServer.GetAllAlbumsForUser(username);
-            foreach (AlbumModel name in names)
+            if (!ShowAll)
             {
-                AlbumNames.Add(name);
+                AlbumNames.Clear();
+                List<AlbumModel> names = await _albumServer.GetAllPublicAlbums();
+                foreach (AlbumModel name in names)
+                {
+                    AlbumNames.Add(name);
+                }
             }
+            else
+            {
+                AlbumNames.Clear();
+                List<AlbumModel> names = await _albumServer.GetAllAlbumsForUser(username);
+                foreach (AlbumModel name in names)
+                {
+                    AlbumNames.Add(name);
+                }
+            }
+            
+        }
+
+        public void ShowOnlyMyAlbums(bool value)
+        {
+            if (_username == "") return;
+
+            Console.WriteLine("Working .. .. . . .");
+            ShowAll = value;
+            GetAlbumsForUser(_username);
         }
 
         public void SetUsername(string username)

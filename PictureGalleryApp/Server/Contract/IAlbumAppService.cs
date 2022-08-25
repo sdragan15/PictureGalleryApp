@@ -15,6 +15,7 @@ namespace PictureGalleryApp.Server.Contract
         Task<bool> AddPictureToServer(PictureModel picture);
         Task<bool> AddAlbum(AlbumModel album);
         Task<bool> DeleteAlbum(int id);
+        Task<List<AlbumModel>> GetAllPublicAlbums();
         void Connect();
     }
 }

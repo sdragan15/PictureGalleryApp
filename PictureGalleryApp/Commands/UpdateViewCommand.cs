@@ -12,8 +12,6 @@ namespace PictureGalleryApp.Commands
 {
     public class UpdateViewCommand : ICommand
     {
-
-
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -23,7 +21,6 @@ namespace PictureGalleryApp.Commands
 
         public void Execute(object parameter)
         {
-            Console.WriteLine("Hello " + parameter);
             if (parameter.Equals("login"))
             {
                 Messenger.Default.Send(new ChangePage(typeof(LoginViewModel)));
@@ -35,6 +32,14 @@ namespace PictureGalleryApp.Commands
             else if (parameter.Equals("loggedin"))
             {
                 Messenger.Default.Send(new ChangePage(typeof(AlbumsViewModel)));
+            }
+            else if (parameter.Equals("myAlbums"))
+            {
+                Messenger.Default.Send(new ChangePage(typeof(AlbumsViewModel)));
+            }
+            else if (parameter.Equals("allAlbums"))
+            {
+
             }
         }
     }

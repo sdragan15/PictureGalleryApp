@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using PictureGalleryApp.Messages;
 using PictureGalleryApp.Model;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace PictureGalleryApp.ViewModel
 {
@@ -17,6 +19,8 @@ namespace PictureGalleryApp.ViewModel
         private SignUpViewModel _signUpViewModel;
         private LoginViewModel _loginViewModel;
         private AlbumsViewModel _albumsViewModel;
+        public ICommand ShowAllAlbumsCommand { get; set; }
+        public ICommand ShowMyAlbumsCommand { get; set; }
 
 
         public ViewModelBase CurrentViewModel
@@ -48,8 +52,19 @@ namespace PictureGalleryApp.ViewModel
             CurrentViewModel = _loginViewModel;
             //CurrentViewModel = _albumsViewModel;
             Messenger.Default.Register<ChangePage>(this, UpdateCurrentView);
+            ShowAllAlbumsCommand = new RelayCommand(ShowAllAlbums);
+            ShowMyAlbumsCommand = new RelayCommand(ShowMyAlbums);
         }
 
+        private void ShowAllAlbums()
+        {
+            _albumsViewModel.ShowOnlyMyAlbums(false);
+        }
+
+        private void ShowMyAlbums()
+        {
+            _albumsViewModel.ShowOnlyMyAlbums(true);
+        }
 
 
         public void UpdateCurrentView(ChangePage message)

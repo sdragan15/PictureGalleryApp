@@ -225,5 +225,32 @@ namespace PictureGalleryApp.Server.Services
             await task;
             return success;
         }
+
+        public async Task<List<AlbumModel>> GetAllPublicAlbums()
+        {
+            List<AlbumModel> result = new List<AlbumModel>();
+            List<AlbumModelDto> resultDto = new List<AlbumModelDto>();
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    resultDto = _proxy.GetAllPublicAlbums();
+                    foreach (AlbumModelDto album in resultDto)
+                    {
+                        result.Add(ConvertFromDto(album));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return result;
+        }
     }
 }

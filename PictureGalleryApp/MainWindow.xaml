@@ -34,8 +34,10 @@
 
 
         <Button Grid.Row="0" Grid.ColumnSpan="2" Height="35" Width="100" Margin="10">Profile</Button>
-        <Button Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Height="35" Width="100" Margin="10">All Albums</Button>
-        <Button Grid.Row="0" Grid.Column="5" Height="35" Width="100" Margin="10">My Albums</Button>
+        <Button Command="{Binding ShowAllAlbumsCommand}" 
+            Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Height="35" Width="100" Margin="10">All Albums</Button>
+        <Button Command="{Binding ShowMyAlbumsCommand}" 
+            Grid.Row="0" Grid.Column="5" Height="35" Width="100" Margin="10">My Albums</Button>
 
         <ContentControl Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="6" Content="{Binding CurrentViewModel}"/>
     </Grid>

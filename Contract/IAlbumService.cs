@@ -22,7 +22,7 @@ namespace Contract
         [OperationContract]
         AlbumModelDto GetAlbum(int id);
         [OperationContract]
-        List<AlbumModelDto> GetAllAlbums();
+        List<AlbumModelDto> GetAllPublicAlbums();
         [OperationContract]
         List<AlbumModelDto> GetAllAlbumsForUser(string username);
         [OperationContract]

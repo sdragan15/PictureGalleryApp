@@ -10,6 +10,11 @@
              FontSize="15"
              d:DataContext="{d:DesignInstance viewModel:AlbumsViewModel,
                                               IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -48,11 +53,12 @@
                     Margin="10"
                     VerticalAlignment="Center">
 
-            <Label>Name:</Label>
+            <Label HorizontalAlignment="Center">Name:</Label>
             <TextBox Text="{Binding Album.Name}"></TextBox>
             <CheckBox HorizontalAlignment="Center"
                       Margin="10"
-                      IsChecked="{Binding Album.IsPrivate}">Is Private</CheckBox>
+                      IsChecked="{Binding Album.IsPrivate}"
+                      Visibility="{Binding Path=ShowAll, Converter={StaticResource VisibleIfTrueConverter}}">Is Private</CheckBox>
             <Button
                 Command="{Binding AddAlbum}"
                 HorizontalAlignment="Center"

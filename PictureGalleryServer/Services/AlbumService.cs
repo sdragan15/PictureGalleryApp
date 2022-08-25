@@ -52,9 +52,16 @@ namespace PictureGalleryServer.Services
             throw new NotImplementedException();
         }
 
-        public List<AlbumModelDto> GetAllAlbums()
+        public List<AlbumModelDto> GetAllPublicAlbums()
         {
-            return _albumDbService.GetAllAlbums();
+            List<AlbumModelDto> res = new List<AlbumModelDto>();
+            List<AlbumModelDto> albums = _albumDbService.GetAllAlbums().Where(x => x.IsPrivate == false).ToList();
+
+            foreach (AlbumModelDto album in albums)
+            {
+                res.Add(new AlbumModelDto() { Name = album.Name, Id = album.Id, User = album.User, Pictures = album.Pictures, IsDeleted = album.IsDeleted, IsPrivate = album.IsPrivate });
+            }
+            return res;
         }
 
         public List<AlbumModelDto> GetAllAlbumsForUser(string username)
