@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using PictureGalleryApp.Model;
 using PictureGalleryApp.Server.Services;
+using PictureGalleryApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,11 +22,15 @@ namespace PictureGalleryApp.ViewModel
         public ICommand GetPictures { get; set; }
         public ICommand DeleteAlbumCommand { get;set; }
         public ICommand CloseWindowCommand { get; set; }
+        public ICommand SelectPictureCommand { get; set; }
+
 
         public ObservableCollection<PictureModel> Pictures { get; set; }
         private PictureModel _pictureBindingModel;
         private int _albumId;
         private AlbumService _albumService;
+        private PictureWindowViewModel _pictureWindowViewModel;
+        private PictureWindow _pictureWindow;
 
 
         public PictureModel PictureBindingModel
@@ -39,6 +44,7 @@ namespace PictureGalleryApp.ViewModel
 
         public AlbumWindowViewModel()
         {
+            _pictureWindowViewModel = new PictureWindowViewModel();
             _albumService = new AlbumService();
             AddPicture = new RelayCommand(AddPictureToServer);
             BrowsePicture = new RelayCommand(BrowsePictureDialog);
@@ -46,6 +52,7 @@ namespace PictureGalleryApp.ViewModel
             PictureBindingModel = new PictureModel() { Name="Hello", Date = DateTime.Now, Tags="asgj i;sdga", Raiting = 4.9};
             Pictures = new ObservableCollection<PictureModel>();
             DeleteAlbumCommand = new RelayCommand<Window>(DeleteAlbum);
+            SelectPictureCommand = new RelayCommand<int>(OpenPicture);
         }
 
         public async void DeleteAlbum(Window window)
@@ -76,6 +83,16 @@ namespace PictureGalleryApp.ViewModel
             {
                 Pictures.Add(picture);
             }
+        }
+
+        private void OpenPicture(int id)
+        {
+            var picture = Pictures.Where(x => x.Id == id).FirstOrDefault();
+            if (picture == null) return;
+
+            _pictureWindow = new PictureWindow(_pictureWindowViewModel);
+            _pictureWindowViewModel.SetPicture(picture);
+            _pictureWindow.ShowDialog();
         }
 
         private void GetAlbumDetails()

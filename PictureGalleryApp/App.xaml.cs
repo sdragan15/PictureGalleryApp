@@ -31,6 +31,7 @@ namespace PictureGalleryApp
             container.Register(Component.For<SignUpViewModel>());
             container.Register(Component.For<MainWindowViewModel>());
             container.Register(Component.For<AlbumWindowViewModel>());
+            container.Register(Component.For<PictureWindowViewModel>());
             container.Register(Component.For<MainWindow>());
             container.Register(Component.For<AlbumWindow>());
             container.Register(Component.For<AuthTemplate>().ImplementedBy<LoginService>());

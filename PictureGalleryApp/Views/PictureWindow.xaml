@@ -1,0 +1,99 @@
+﻿<Window x:Class="PictureGalleryApp.Views.PictureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PictureGalleryApp.Views"
+        xmlns:viewModel="clr-namespace:PictureGalleryApp.ViewModel"
+        mc:Ignorable="d"
+        Title="PictureWindow" Height="450" Width="800"
+        WindowState="Maximized"
+        FontSize="15"
+        d:DataContext="{d:DesignInstance viewModel:PictureWindowViewModel,
+                                         IsDesignTimeCreatable=True}">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Images/BlueBackground.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition MaxWidth="150" Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="50" Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition MaxHeight="50" Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Canvas
+            x:Name="pictureCanvas"
+            Grid.Row="0" Grid.RowSpan="5"
+            Grid.Column="0" Grid.ColumnSpan="5">
+            <Canvas.Background>
+                <SolidColorBrush Color="Black" Opacity="0.5"/>
+            </Canvas.Background>
+            
+            <Image 
+                Source="{Binding PictureBindingModel.Url}"
+                Width="{Binding Path=ActualWidth, ElementName=pictureCanvas}"
+                Height="{Binding Path=ActualHeight, ElementName=pictureCanvas}"
+                Stretch="Uniform"/>
+        </Canvas>
+
+        <Border Grid.Row="4"
+                Grid.Column="2"
+                CornerRadius="10"
+                Background="White"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Label FontSize="15">Raiting:</Label>
+                <Label Content="{Binding PictureBindingModel.Raiting}" FontSize="15"></Label>
+            </StackPanel>
+        </Border>
+        
+        
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="0" Grid.Column="5" 
+                    Grid.RowSpan="5" 
+                    Margin="10"
+                    MaxWidth="150"
+                    MaxHeight="300">
+            <Label 
+                HorizontalAlignment="Center"
+                FontWeight="Bold"
+                Content="{Binding RatingSlider}"></Label>
+            <Slider Maximum="5" Minimum="0" Value="{Binding RatingSlider}"></Slider>
+            <Label HorizontalAlignment="Center">Name:</Label>
+            <TextBox Text="{Binding PictureBindingModel.Name}"></TextBox>
+            <Label HorizontalAlignment="Center">Tags:</Label>
+            <TextBox Text="{Binding PictureBindingModel.Tags}" TextWrapping="Wrap" Height="100">
+            </TextBox>
+            <Button
+                Margin="10"
+                
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="15"
+                Width="100"
+                Background="GreenYellow">Update
+            </Button>
+            <Button 
+                Width="100"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                FontSize="15"
+                Background="Red">
+                Delete
+            </Button>
+        </StackPanel>
+
+        
+    </Grid>
+</Window>
