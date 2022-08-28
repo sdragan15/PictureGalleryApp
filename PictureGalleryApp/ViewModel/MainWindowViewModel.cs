@@ -21,6 +21,7 @@ namespace PictureGalleryApp.ViewModel
         private AlbumsViewModel _albumsViewModel;
         public ICommand ShowAllAlbumsCommand { get; set; }
         public ICommand ShowMyAlbumsCommand { get; set; }
+        public ICommand SignOutCommand { get; set; }
 
 
         public ViewModelBase CurrentViewModel
@@ -54,6 +55,14 @@ namespace PictureGalleryApp.ViewModel
             Messenger.Default.Register<ChangePage>(this, UpdateCurrentView);
             ShowAllAlbumsCommand = new RelayCommand(ShowAllAlbums);
             ShowMyAlbumsCommand = new RelayCommand(ShowMyAlbums);
+            SignOutCommand = new RelayCommand(SignOut);
+        }
+
+        private void SignOut()
+        {
+            _loginViewModel.SignOut();
+            CurrentViewModel = _loginViewModel;
+            Messenger.Default.Register<ChangePage>(this, UpdateCurrentView);
         }
 
         private void ShowAllAlbums()

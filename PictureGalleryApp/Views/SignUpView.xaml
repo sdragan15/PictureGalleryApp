@@ -17,10 +17,39 @@
             </Border.Effect>
             <StackPanel>
                 <Label FontWeight="Bold" FontSize="30" Grid.Column="1" Grid.Row="1">Sing up</Label>
-                <TextBox Text="{Binding SignUpBindingModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
-                <TextBox Text="{Binding SignUpBindingModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
-                <TextBox Text="{Binding SignUpBindingModel.Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
-                <TextBox Text="{Binding SignUpBindingModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" FontSize="11" VerticalAlignment="Center">Username:</Label>
+                    <TextBox Grid.Column="1" Text="{Binding SignUpBindingModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" FontSize="11" VerticalAlignment="Center">Name:</Label>
+                    <TextBox Grid.Column="1" Text="{Binding SignUpBindingModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" FontSize="11" VerticalAlignment="Center">Lastname:</Label>
+                    <TextBox Grid.Column="1" Text="{Binding SignUpBindingModel.Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" FontSize="11" VerticalAlignment="Center">Password:</Label>
+                    <TextBox Grid.Column="1" Text="{Binding SignUpBindingModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
+                </Grid>
+
                 <Button Command="{Binding SignUpCommand}" Background="#01d3d8" Padding="5" Margin="10">Sing up</Button>
                 <Label x:Name="logInBtn" HorizontalAlignment="Center">or Log in
                     <Label.InputBindings>

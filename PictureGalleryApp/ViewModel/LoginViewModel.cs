@@ -82,6 +82,13 @@ namespace PictureGalleryApp.ViewModel
             }
         }
 
+        public void SignOut()
+        {
+            _albumViewModel.SetUsername("");
+            LoginBindingModel.Username = "";
+            LoginBindingModel.Password = "";
+        }
+
         //private void Login()
         //{
         //    Thread thread = new Thread(() =>

@@ -17,12 +17,12 @@ namespace PictureGalleryApp.ViewModel
 {
     public class AlbumWindowViewModel : ViewModelBase
     {
-        public ICommand AddPicture { get; set; }
-        public ICommand BrowsePicture { get; set; }
-        public ICommand GetPictures { get; set; }
-        public ICommand DeleteAlbumCommand { get;set; }
-        public ICommand CloseWindowCommand { get; set; }
-        public ICommand SelectPictureCommand { get; set; }
+        public RelayCommand AddPicture { get; set; }
+        public RelayCommand BrowsePicture { get; set; }
+        public RelayCommand<int> GetPictures { get; set; }
+        public RelayCommand<Window> DeleteAlbumCommand { get;set; }
+        public RelayCommand CloseWindowCommand { get; set; }
+        public RelayCommand<int> SelectPictureCommand { get; set; }
 
 
         public ObservableCollection<PictureModel> Pictures { get; set; }
@@ -31,11 +31,33 @@ namespace PictureGalleryApp.ViewModel
         private AlbumService _albumService;
         private PictureWindowViewModel _pictureWindowViewModel;
         private PictureWindow _pictureWindow;
+        private string _pictureName;
+        private string _pictureTags;
+
+        public string PictureTags
+        {
+            get { return _pictureTags; }
+            set
+            {
+                Set(ref _pictureTags, value);
+                AddPicture.RaiseCanExecuteChanged();
+            }
+        }
+
+        public string PictureName
+        {
+            get { return _pictureName; }
+            set
+            {
+                Set(ref _pictureName, value);
+                AddPicture.RaiseCanExecuteChanged();
+            }
+        }
 
 
         public PictureModel PictureBindingModel
         {
-            get { return _pictureBindingModel; }
+            get {return _pictureBindingModel; }
             set
             {
                 Set(ref _pictureBindingModel, value);
@@ -46,13 +68,15 @@ namespace PictureGalleryApp.ViewModel
         {
             _pictureWindowViewModel = new PictureWindowViewModel();
             _albumService = new AlbumService();
-            AddPicture = new RelayCommand(AddPictureToServer);
+            AddPicture = new RelayCommand(AddPictureToServer, AddPictureValidation);
             BrowsePicture = new RelayCommand(BrowsePictureDialog);
             GetPictures = new RelayCommand<int>(GetAlbumPictures);
-            PictureBindingModel = new PictureModel() { Name="Hello", Date = DateTime.Now, Tags="asgj i;sdga", Raiting = 4.9};
+            PictureBindingModel = new PictureModel();
             Pictures = new ObservableCollection<PictureModel>();
             DeleteAlbumCommand = new RelayCommand<Window>(DeleteAlbum);
             SelectPictureCommand = new RelayCommand<int>(OpenPicture);
+            PictureName = "";
+            PictureTags = "";
         }
 
         public async void DeleteAlbum(Window window)
@@ -68,9 +92,21 @@ namespace PictureGalleryApp.ViewModel
             GetAlbumPictures(_albumId);
         }
 
+        private bool AddPictureValidation()
+        {
+            if (String.IsNullOrWhiteSpace(PictureName) || String.IsNullOrWhiteSpace(PictureTags))
+            {
+                return false;
+            }
+            return true;
+        }
+
         private async void AddPictureToServer()
         {
             PictureBindingModel.AlbumId = _albumId;
+            PictureBindingModel.Name = PictureName;
+            PictureBindingModel.Tags = PictureTags;
+            PictureBindingModel.Date = DateTime.Now;
             await _albumService.AddPictureToServer(PictureBindingModel);
             Pictures.Clear();
             GetAlbumPictures(_albumId);

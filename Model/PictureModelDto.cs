@@ -25,6 +25,10 @@ namespace Model
         public string ImageUrl { get; set; }
         [DataMember]
         public int AlbumId { get; set; }
+        [DataMember]
+        public int NumberOfRatings { get; set; }
+        [DataMember]
+        public List<string> UserRated { get; set; }
 
         public PictureModelDto()
         {

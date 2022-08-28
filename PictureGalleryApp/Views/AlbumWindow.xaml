@@ -69,9 +69,10 @@
                     Grid.RowSpan="3" 
                     Margin="10">
             <Label HorizontalAlignment="Center">Name:</Label>
-            <TextBox Text="{Binding PictureBindingModel.Name}"></TextBox>
+            <TextBox Text="{Binding PictureName, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
             <Label HorizontalAlignment="Center">Tags:</Label>
-            <TextBox Text="{Binding PictureBindingModel.Tags}" TextWrapping="Wrap" Height="100">
+            <TextBox Text="{Binding PictureTags, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Height="100">
             </TextBox>
             <Button
                 Command="{Binding BrowsePicture}"

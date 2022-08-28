@@ -15,29 +15,44 @@
             <ImageBrush ImageSource="/Assets/Images/BlueBackground.png" Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition MaxWidth="150" Width="1*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition MaxWidth="150" Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
+            <RowDefinition MaxHeight="150" Height="1*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="2*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition MaxHeight="150" Height="1*" />
         </Grid.RowDefinitions>
 
 
-        <Button Grid.Row="0" Grid.ColumnSpan="2" Height="35" Width="100" Margin="10">Profile</Button>
-        <Button Command="{Binding ShowAllAlbumsCommand}" 
-            Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Height="35" Width="100" Margin="10">All Albums</Button>
-        <Button Command="{Binding ShowMyAlbumsCommand}" 
-            Grid.Row="0" Grid.Column="5" Height="35" Width="100" Margin="10">My Albums</Button>
+        <Button Width="100" Margin="5"
+                Height="25"
+                Grid.Row="0"
+                Grid.Column="0" Grid.ColumnSpan="2">Profile</Button>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="4" Grid.ColumnSpan="4"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="10">
+            <Button Command="{Binding ShowAllAlbumsCommand}"
+                    Width="100" Margin="5">All Albums</Button>
+            <Button Command="{Binding ShowMyAlbumsCommand}"
+                    Width="100" Margin="5"
+                    >My Albums</Button>
+            <Button Width="70" Margin="5"
+                    Command="{Binding SignOutCommand}"
+                    >Sign out</Button>
+        </StackPanel>
+        
 
         <ContentControl Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="6" Content="{Binding CurrentViewModel}"/>
     </Grid>
