@@ -28,11 +28,12 @@ namespace Model
         [DataMember]
         public int NumberOfRatings { get; set; }
         [DataMember]
-        public List<string> UserRated { get; set; }
+        public string UserRated { get; set; }
 
         public PictureModelDto()
         {
             IsDeleted = false;
+            UserRated = "";
         }
     }
 }

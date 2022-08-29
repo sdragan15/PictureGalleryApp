@@ -32,8 +32,10 @@ namespace Contract
         [OperationContract]
         bool UpdatePicture(PictureModelDto picture);
         [OperationContract]
-        PictureModelDto GetPicture(int id);
+        PictureModelDto GetPicture(int albumId, int id);
         [OperationContract]
         List<PictureModelDto> GetAllPictureForAlbum(int id);
+        [OperationContract]
+        void RatePicture(PictureModelDto picture);
     }
 }

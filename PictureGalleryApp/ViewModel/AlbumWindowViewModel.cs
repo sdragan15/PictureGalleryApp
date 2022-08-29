@@ -23,9 +23,8 @@ namespace PictureGalleryApp.ViewModel
         public RelayCommand<Window> DeleteAlbumCommand { get;set; }
         public RelayCommand CloseWindowCommand { get; set; }
         public RelayCommand<int> SelectPictureCommand { get; set; }
-
-
         public ObservableCollection<PictureModel> Pictures { get; set; }
+
         private PictureModel _pictureBindingModel;
         private int _albumId;
         private AlbumService _albumService;
@@ -64,9 +63,9 @@ namespace PictureGalleryApp.ViewModel
             }
         }
 
-        public AlbumWindowViewModel()
+        public AlbumWindowViewModel(PictureWindowViewModel pictureWindowViewModel)
         {
-            _pictureWindowViewModel = new PictureWindowViewModel();
+            _pictureWindowViewModel = pictureWindowViewModel;
             _albumService = new AlbumService();
             AddPicture = new RelayCommand(AddPictureToServer, AddPictureValidation);
             BrowsePicture = new RelayCommand(BrowsePictureDialog);
@@ -94,7 +93,8 @@ namespace PictureGalleryApp.ViewModel
 
         private bool AddPictureValidation()
         {
-            if (String.IsNullOrWhiteSpace(PictureName) || String.IsNullOrWhiteSpace(PictureTags))
+            if (String.IsNullOrWhiteSpace(PictureName) || String.IsNullOrWhiteSpace(PictureTags)
+                || String.IsNullOrWhiteSpace(PictureBindingModel.Url))
             {
                 return false;
             }
@@ -110,6 +110,7 @@ namespace PictureGalleryApp.ViewModel
             await _albumService.AddPictureToServer(PictureBindingModel);
             Pictures.Clear();
             GetAlbumPictures(_albumId);
+            PictureBindingModel.Clear();
         }
 
         private async void GetAlbumPictures(int albumId)
@@ -125,7 +126,6 @@ namespace PictureGalleryApp.ViewModel
         {
             var picture = Pictures.Where(x => x.Id == id).FirstOrDefault();
             if (picture == null) return;
-
             _pictureWindow = new PictureWindow(_pictureWindowViewModel);
             _pictureWindowViewModel.SetPicture(picture);
             _pictureWindow.ShowDialog();
@@ -147,6 +147,7 @@ namespace PictureGalleryApp.ViewModel
                 try
                 {
                     PictureBindingModel.Url = fileDialog.FileName;
+                    AddPicture.RaiseCanExecuteChanged();
                 }
                 catch (Exception ex)
                 {

@@ -83,9 +83,13 @@ namespace PictureGalleryServer.Services
             return album.Pictures;
         }
 
-        public PictureModelDto GetPicture(int id)
+        public PictureModelDto GetPicture(int albumId, int id)
         {
-            throw new NotImplementedException();
+            var album = _context.Albums.FirstOrDefault(x => x.Id == albumId);
+            var upPicture = album.Pictures.Where(x => x.Id == id).FirstOrDefault();
+            if (upPicture == null) return null;
+
+            return upPicture;
         }
 
         public bool UpdateAlbum(AlbumModelDto album)
@@ -95,7 +99,22 @@ namespace PictureGalleryServer.Services
 
         public bool UpdatePicture(PictureModelDto picture)
         {
-            throw new NotImplementedException();
+            var upPicture = GetPicture(picture.AlbumId, picture.Id);
+            if(upPicture == null)
+            {
+                return false;
+            }
+
+            upPicture.Name = picture.Name;
+            upPicture.Tags = picture.Tags;
+            upPicture.Rating = picture.Rating;
+            upPicture.IsDeleted = picture.IsDeleted;
+            upPicture.UserRated = picture.UserRated;
+            upPicture.AlbumId = picture.AlbumId;
+            upPicture.NumberOfRatings = picture.NumberOfRatings;
+
+            _context.SaveChanges();
+            return true;
         }
     }
 }

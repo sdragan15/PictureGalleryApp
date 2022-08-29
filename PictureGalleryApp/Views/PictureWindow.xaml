@@ -54,7 +54,7 @@
                 HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Label FontSize="15">Raiting:</Label>
-                <Label Content="{Binding PictureBindingModel.Raiting}" FontSize="15"></Label>
+                <Label Content="{Binding PictureBindingModel.Raiting, StringFormat=N2}" FontSize="15"></Label>
             </StackPanel>
         </Border>
         
@@ -64,20 +64,29 @@
                     Grid.RowSpan="5" 
                     Margin="10"
                     MaxWidth="150"
-                    MaxHeight="300">
-            <Label 
+                    MaxHeight="360">
+            <StackPanel Orientation="Horizontal">
+                <Label>Rating:</Label>
+                <Label 
                 HorizontalAlignment="Center"
                 FontWeight="Bold"
                 Content="{Binding RatingSlider}"></Label>
+            </StackPanel>
+
             <Slider Maximum="5" Minimum="0" Value="{Binding RatingSlider}"></Slider>
+            <Button
+                Command="{Binding RateCommand}"
+                Margin="10"
+                Width="100">Rate</Button>
+            
             <Label HorizontalAlignment="Center">Name:</Label>
-            <TextBox Text="{Binding PictureBindingModel.Name}"></TextBox>
+            <TextBox Text="{Binding PictureName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Label HorizontalAlignment="Center">Tags:</Label>
-            <TextBox Text="{Binding PictureBindingModel.Tags}" TextWrapping="Wrap" Height="100">
+            <TextBox Text="{Binding PictureTags, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Height="100">
             </TextBox>
             <Button
                 Margin="10"
-                
+                Command="{Binding UpdateCommand}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="15"
@@ -85,6 +94,7 @@
                 Background="GreenYellow">Update
             </Button>
             <Button 
+                Command="{Binding DeleteCommand}"
                 Width="100"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"

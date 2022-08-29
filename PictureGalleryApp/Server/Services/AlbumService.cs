@@ -90,30 +90,54 @@ namespace PictureGalleryApp.Server.Services
 
         private PictureModelDto ConvertToDto(PictureModel picture)
         {
-            return new PictureModelDto()
+            PictureModelDto res = new PictureModelDto()
             {
                 Id = picture.Id,
                 Name = picture.Name,
                 Date = picture.Date,
                 ImageUrl = picture.Url,
                 Rating = picture.Raiting,
+                UserRated = "",
                 Tags = picture.Tags,
                 AlbumId = picture.AlbumId,
+                NumberOfRatings = picture.NumberOfRatings,
             };
+
+            foreach(var user in picture.UserRated)
+            {
+                res.UserRated += ',' + user;
+            }
+
+            return res;
         }
 
         private PictureModel ConvertFromDto(PictureModelDto picture)
         {
-            return new PictureModel()
+            PictureModel res = new PictureModel()
             {
                 Id = picture.Id,
                 Name = picture.Name,
                 Url = picture.ImageUrl,
                 Date = picture.Date,
                 Tags = picture.Tags,
-                AlbumId= picture.AlbumId,
+                AlbumId = picture.AlbumId,
+                UserRated = new List<string>(),
                 Raiting = picture.Rating,
+                NumberOfRatings= picture.NumberOfRatings,
             };
+
+            if (String.IsNullOrEmpty(picture.UserRated))
+            {
+                return res;
+            }
+
+            var users = picture.UserRated.Split(',');
+            foreach (var user in users)
+            {
+                res.UserRated.Add(user);
+            }
+
+            return res;
         }
 
 
@@ -240,6 +264,54 @@ namespace PictureGalleryApp.Server.Services
                     {
                         result.Add(ConvertFromDto(album));
                     }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return result;
+        }
+
+        public async Task<bool> RatePicture(PictureModel picture)
+        {
+            bool success = true;
+
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    _proxy.RatePicture(ConvertToDto(picture));
+                }
+                catch (Exception ex)
+                {
+                    success = false;
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return success;
+        }
+
+        public async Task<PictureModel> GetPicture(int albumId, int id)
+        {
+            PictureModel result = new PictureModel();
+
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    PictureModelDto resultDto = _proxy.GetPicture(albumId, id);
+                    result = ConvertFromDto(resultDto);
                 }
                 catch (Exception ex)
                 {

@@ -1,4 +1,5 @@
-﻿using PictureGalleryApp.Model;
+﻿using Model;
+using PictureGalleryApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,5 +18,7 @@ namespace PictureGalleryApp.Server.Contract
         Task<bool> DeleteAlbum(int id);
         Task<List<AlbumModel>> GetAllPublicAlbums();
         void Connect();
+        Task<bool> RatePicture(PictureModel picture);
+        Task<PictureModel> GetPicture(int albumId, int id);
     }
 }

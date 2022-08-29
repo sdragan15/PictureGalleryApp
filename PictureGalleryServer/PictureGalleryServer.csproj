@@ -112,6 +112,14 @@
     <Compile Include="Migrations\202208281249033_pictureModelRatings.designer.cs">
       <DependentUpon>202208281249033_pictureModelRatings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208292222388_PictureUserRatingList.cs" />
+    <Compile Include="Migrations\202208292222388_PictureUserRatingList.designer.cs">
+      <DependentUpon>202208292222388_PictureUserRatingList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208292244433_PictureUserRated.cs" />
+    <Compile Include="Migrations\202208292244433_PictureUserRated.designer.cs">
+      <DependentUpon>202208292244433_PictureUserRated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\AlbumDbService.cs" />
     <Compile Include="Services\AlbumService.cs" />
@@ -180,6 +188,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208281249033_pictureModelRatings.resx">
       <DependentUpon>202208281249033_pictureModelRatings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208292222388_PictureUserRatingList.resx">
+      <DependentUpon>202208292222388_PictureUserRatingList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208292244433_PictureUserRated.resx">
+      <DependentUpon>202208292244433_PictureUserRated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

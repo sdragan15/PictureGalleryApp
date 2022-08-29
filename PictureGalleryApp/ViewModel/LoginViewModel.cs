@@ -23,6 +23,7 @@ namespace PictureGalleryApp.ViewModel
         public IServerCommand LoginServerCommand { get; set; }
         private AlbumsViewModel _albumViewModel;
 
+        PictureWindowViewModel _pictureWindowViewModel;
         private LoginModel _loginBindingModel = new LoginModel();
         private string _loginUri = "net.tcp://localhost:10106/Auth";
         private AuthTemplate _loginServer;
@@ -44,8 +45,9 @@ namespace PictureGalleryApp.ViewModel
         }
 
         
-        public LoginViewModel(AlbumsViewModel albumsViewModel)
+        public LoginViewModel(AlbumsViewModel albumsViewModel, PictureWindowViewModel pictureWindowViewModel)
         {
+            _pictureWindowViewModel = pictureWindowViewModel;
             _albumViewModel = albumsViewModel;
             UpdateViewCommand = new UpdateViewCommand();
             LoginCommand = new RelayCommand(Login);
@@ -79,6 +81,7 @@ namespace PictureGalleryApp.ViewModel
             {
                 _albumViewModel.GetAlbumsForUser(LoginBindingModel.Username);
                 _albumViewModel.SetUsername(LoginBindingModel.Username);
+                _pictureWindowViewModel.SetUsername(LoginBindingModel.Username);
             }
         }
 
@@ -87,6 +90,11 @@ namespace PictureGalleryApp.ViewModel
             _albumViewModel.SetUsername("");
             LoginBindingModel.Username = "";
             LoginBindingModel.Password = "";
+        }
+
+        public string GetUsername()
+        {
+            return LoginBindingModel.Username;
         }
 
         //private void Login()

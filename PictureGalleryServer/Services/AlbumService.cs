@@ -86,9 +86,9 @@ namespace PictureGalleryServer.Services
             return _albumDbService.GetAllPicturesForAlbum(id);
         }
 
-        public PictureModelDto GetPicture(int id)
+        public PictureModelDto GetPicture(int albumId, int id)
         {
-            throw new NotImplementedException();
+            return _albumDbService.GetPicture(albumId, id);
         }
 
         public bool UpdateAlbum(AlbumModelDto album)
@@ -99,6 +99,15 @@ namespace PictureGalleryServer.Services
         public bool UpdatePicture(PictureModelDto picture)
         {
             throw new NotImplementedException();
+        }
+
+        public void RatePicture(PictureModelDto picture)
+        {
+            PictureModelDto pictureModel = GetPicture(picture.AlbumId, picture.Id);
+            pictureModel.Rating = (pictureModel.Rating * pictureModel.NumberOfRatings + picture.Rating) / (pictureModel.NumberOfRatings + 1);
+            pictureModel.UserRated += picture.UserRated;
+            pictureModel.NumberOfRatings++;
+            _albumDbService.UpdatePicture(pictureModel);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace PictureGalleryApp.Model
         private string _url;
         private int _albumId;
         private int _numberOfRatings;
-        private string _userRated;
+        public List<string> UserRated;
 
     
 
@@ -31,7 +31,6 @@ namespace PictureGalleryApp.Model
         public string Url { get => _url; set => Set(ref _url, value); }
         public int AlbumId { get => _albumId; set => Set(ref _albumId, value); }
         public int NumberOfRatings { get => _numberOfRatings; set => Set(ref _numberOfRatings, value); }
-        public string UserRated { get => _userRated; set => Set(ref _userRated, value); }
 
         public PictureModel()
         {
@@ -40,7 +39,19 @@ namespace PictureGalleryApp.Model
             Raiting = 0;
             Date = DateTime.Now;
             NumberOfRatings = 0;
-            UserRated = "";
+            UserRated = new List<string>();
+            Url = "";
+        }
+
+        public void Clear()
+        {
+            Name = "";
+            Tags = "";
+            Raiting = 0;
+            Date = DateTime.Now;
+            NumberOfRatings = 0;
+            UserRated = new List<string>();
+            Url = "";
         }
     }
 }
