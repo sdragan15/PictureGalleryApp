@@ -56,9 +56,15 @@ namespace PictureGalleryServer.Services
             return true;
         }
 
-        public bool DeletePicture(int id)
+        public bool DeletePicture(int albumId, int id)
         {
-            throw new NotImplementedException();
+            if(GetPicture(albumId, id) != null)
+            {
+                GetPicture(albumId, id).IsDeleted = true;
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public AlbumModelDto GetAlbum(int id)
@@ -73,20 +79,20 @@ namespace PictureGalleryServer.Services
 
         public List<PictureModelDto> GetAllPicturesForAlbum(int id)
         {
-            AlbumModelDto album = _context.Albums.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
+            var pictures = _context.Albums.FirstOrDefault(x => x.Id == id && x.IsDeleted == false).Pictures.Where(x => x.IsDeleted == false).ToList();
 
-            if(album == null)
+            if(pictures == null)
             {
                 return null;
             }
 
-            return album.Pictures;
+            return pictures;
         }
 
         public PictureModelDto GetPicture(int albumId, int id)
         {
             var album = _context.Albums.FirstOrDefault(x => x.Id == albumId);
-            var upPicture = album.Pictures.Where(x => x.Id == id).FirstOrDefault();
+            var upPicture = album.Pictures.Where(x => x.Id == id && x.IsDeleted == false).FirstOrDefault();
             if (upPicture == null) return null;
 
             return upPicture;
@@ -112,6 +118,7 @@ namespace PictureGalleryServer.Services
             upPicture.UserRated = picture.UserRated;
             upPicture.AlbumId = picture.AlbumId;
             upPicture.NumberOfRatings = picture.NumberOfRatings;
+            upPicture.ImageUrl = picture.ImageUrl;
 
             _context.SaveChanges();
             return true;

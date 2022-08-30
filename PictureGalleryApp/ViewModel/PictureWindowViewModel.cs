@@ -7,13 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PictureGalleryApp.ViewModel
 {
     public class PictureWindowViewModel : ViewModelBase
     {
         public RelayCommand UpdateCommand { get; set; }
-        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand<Window> DeleteCommand { get; set; }
         public RelayCommand RateCommand { get; set; }
 
         private IAlbumAppService _albumAppService;
@@ -24,26 +25,6 @@ namespace PictureGalleryApp.ViewModel
         private string _pictureTags;
 
 
-        private void Delete()
-        {
-            Console.WriteLine("Deleting");
-        }
-
-        private bool UpdateValidate()
-        {
-            if(String.IsNullOrWhiteSpace(PictureBindingModel.Name)
-                || String.IsNullOrWhiteSpace(PictureBindingModel.Tags))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        private void Update()
-        {
-            Console.WriteLine("Updating");
-        }
 
         public string PictureName
         {
@@ -91,7 +72,7 @@ namespace PictureGalleryApp.ViewModel
             _albumAppService = albumAppService;
             RatingSlider = 3;
             UpdateCommand = new RelayCommand(Update, UpdateValidate);
-            DeleteCommand = new RelayCommand(Delete);
+            DeleteCommand = new RelayCommand<Window>(Delete);
             RateCommand = new RelayCommand(Rate, RateValidate);
         }
 
@@ -127,5 +108,26 @@ namespace PictureGalleryApp.ViewModel
             _username = username;
         }
 
+        private async void Update()
+        {
+            await _albumAppService.UpdatePicture(PictureBindingModel);
+        }
+
+        private bool UpdateValidate()
+        {
+            if (String.IsNullOrWhiteSpace(PictureBindingModel.Name)
+                || String.IsNullOrWhiteSpace(PictureBindingModel.Tags))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private async void Delete(Window window)
+        {
+            await _albumAppService.DeletePicture(PictureBindingModel.AlbumId, PictureBindingModel.Id);
+            window.Close();
+        }
     }
 }

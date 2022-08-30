@@ -17,7 +17,7 @@ namespace Contract
         List<AlbumModelDto> GetAllAlbums();
         bool AddPicture(PictureModelDto picture);
         bool UpdatePicture(PictureModelDto picture);
-        bool DeletePicture(int id);
+        bool DeletePicture(int albumId, int id);
         PictureModelDto GetPicture(int albumId, int id);
         List<PictureModelDto> GetAllPicturesForAlbum(int id);
     }

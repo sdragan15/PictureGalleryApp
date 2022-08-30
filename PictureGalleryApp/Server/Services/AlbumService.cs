@@ -324,5 +324,53 @@ namespace PictureGalleryApp.Server.Services
 
             return result;
         }
+
+        public async Task<bool> UpdatePicture(PictureModel picture)
+        {
+            bool success = true;
+
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    _proxy.UpdatePicture(ConvertToDto(picture));
+                }
+                catch (Exception ex)
+                {
+                    success = false;
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return success;
+        }
+
+        public async Task<bool> DeletePicture(int albumId, int id)
+        {
+            bool success = true;
+
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    _proxy.DeletePicture(albumId, id);
+                }
+                catch (Exception ex)
+                {
+                    success = false;
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return success;
+        }
     }
 }

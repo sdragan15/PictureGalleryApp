@@ -20,5 +20,7 @@ namespace PictureGalleryApp.Server.Contract
         void Connect();
         Task<bool> RatePicture(PictureModel picture);
         Task<PictureModel> GetPicture(int albumId, int id);
+        Task<bool> UpdatePicture(PictureModel picture);
+        Task<bool> DeletePicture(int albumId, int id);
     }
 }

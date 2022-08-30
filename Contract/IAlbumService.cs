@@ -28,7 +28,7 @@ namespace Contract
         [OperationContract]
         bool AddPicture(PictureModelDto picture);
         [OperationContract]
-        bool DeletePicture(int id);
+        bool DeletePicture(int albumId, int id);
         [OperationContract]
         bool UpdatePicture(PictureModelDto picture);
         [OperationContract]

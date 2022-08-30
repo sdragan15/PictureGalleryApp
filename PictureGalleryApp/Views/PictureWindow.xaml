@@ -9,6 +9,7 @@
         Title="PictureWindow" Height="450" Width="800"
         WindowState="Maximized"
         FontSize="15"
+        x:Name="PictureWin"
         d:DataContext="{d:DesignInstance viewModel:PictureWindowViewModel,
                                          IsDesignTimeCreatable=True}">
     <Grid>
@@ -94,7 +95,7 @@
                 Background="GreenYellow">Update
             </Button>
             <Button 
-                Command="{Binding DeleteCommand}"
+                Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=PictureWin}"
                 Width="100"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"

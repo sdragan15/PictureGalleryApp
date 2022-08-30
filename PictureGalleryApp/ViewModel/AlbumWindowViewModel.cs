@@ -115,6 +115,7 @@ namespace PictureGalleryApp.ViewModel
 
         private async void GetAlbumPictures(int albumId)
         {
+            Pictures.Clear();
             List<PictureModel> res = await _albumService.GetAllPicturesForAlbum(albumId);
             foreach (PictureModel picture in res)
             {
@@ -129,6 +130,7 @@ namespace PictureGalleryApp.ViewModel
             _pictureWindow = new PictureWindow(_pictureWindowViewModel);
             _pictureWindowViewModel.SetPicture(picture);
             _pictureWindow.ShowDialog();
+            GetAlbumPictures(_albumId);
         }
 
         private void GetAlbumDetails()

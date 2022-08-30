@@ -42,9 +42,9 @@ namespace PictureGalleryServer.Services
             return _albumDbService.DeleteAlbum(id);
         }
 
-        public bool DeletePicture(int id)
+        public bool DeletePicture(int albumId, int id)
         {
-            throw new NotImplementedException();
+            return _albumDbService.DeletePicture(albumId, id);
         }
 
         public AlbumModelDto GetAlbum(int id)
@@ -98,7 +98,7 @@ namespace PictureGalleryServer.Services
 
         public bool UpdatePicture(PictureModelDto picture)
         {
-            throw new NotImplementedException();
+            return _albumDbService.UpdatePicture(picture);
         }
 
         public void RatePicture(PictureModelDto picture)
