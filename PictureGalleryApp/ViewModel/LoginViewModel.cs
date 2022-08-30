@@ -79,6 +79,7 @@ namespace PictureGalleryApp.ViewModel
 
             if (IsLoggedIn)
             {
+                Console.WriteLine(Properties.Settings.Default.Token);
                 _albumViewModel.GetAlbumsForUser(LoginBindingModel.Username);
                 _albumViewModel.SetUsername(LoginBindingModel.Username);
                 _pictureWindowViewModel.SetUsername(LoginBindingModel.Username);

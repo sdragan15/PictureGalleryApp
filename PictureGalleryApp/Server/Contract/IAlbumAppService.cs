@@ -15,6 +15,7 @@ namespace PictureGalleryApp.Server.Contract
         Task<List<PictureModel>> GetAllPicturesForAlbum(int id);
         Task<bool> AddPictureToServer(PictureModel picture);
         Task<bool> AddAlbum(AlbumModel album);
+        Task<AlbumModel> GetAlbum(int id);
         Task<bool> DeleteAlbum(int id);
         Task<List<AlbumModel>> GetAllPublicAlbums();
         void Connect();

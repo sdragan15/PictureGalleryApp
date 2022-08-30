@@ -32,6 +32,16 @@ namespace PictureGalleryApp.ViewModel
         private PictureWindow _pictureWindow;
         private string _pictureName;
         private string _pictureTags;
+        private AlbumModel _albumBindingModel;
+
+        public AlbumModel AlbumBindingModel
+        {
+            get { return _albumBindingModel; }
+            set
+            {
+                Set(ref _albumBindingModel, value);
+            }
+        }
 
         public string PictureTags
         {
@@ -115,6 +125,7 @@ namespace PictureGalleryApp.ViewModel
 
         private async void GetAlbumPictures(int albumId)
         {
+            GetAlbumDetails();
             Pictures.Clear();
             List<PictureModel> res = await _albumService.GetAllPicturesForAlbum(albumId);
             foreach (PictureModel picture in res)
@@ -133,9 +144,9 @@ namespace PictureGalleryApp.ViewModel
             GetAlbumPictures(_albumId);
         }
 
-        private void GetAlbumDetails()
+        private async void GetAlbumDetails()
         {
-
+            AlbumBindingModel = await _albumService.GetAlbum(_albumId);
         }
 
         private void BrowsePictureDialog()

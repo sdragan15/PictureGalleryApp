@@ -16,7 +16,7 @@
                 <DropShadowEffect BlurRadius="10" ShadowDepth="3" />
             </Border.Effect>
             <StackPanel>
-                <Label FontWeight="Bold" FontSize="30" Grid.Column="1" Grid.Row="1">Sing up</Label>
+                <Label FontWeight="Bold" FontSize="30" Grid.Column="1" Grid.Row="1">Register User</Label>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
@@ -50,8 +50,8 @@
                     <TextBox Grid.Column="1" Text="{Binding SignUpBindingModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="5" Margin="10 5 10 5"></TextBox>
                 </Grid>
 
-                <Button Command="{Binding SignUpCommand}" Background="#01d3d8" Padding="5" Margin="10">Sing up</Button>
-                <Label x:Name="logInBtn" HorizontalAlignment="Center">or Log in
+                <Button Command="{Binding SignUpCommand}" Background="#01d3d8" Padding="5" Margin="10">Register User</Button>
+                <!--<Label x:Name="logInBtn" HorizontalAlignment="Center">or Log in
                     <Label.InputBindings>
                         <MouseBinding Command="{Binding UpdateViewCommand}" CommandParameter="login" MouseAction="LeftClick"/>
                     </Label.InputBindings>
@@ -66,7 +66,7 @@
                             </Style.Triggers>
                         </Style>
                     </Label.Style>
-                </Label>
+                </Label>-->
             </StackPanel>
         </Border>
     </Grid>

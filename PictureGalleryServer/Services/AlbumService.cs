@@ -49,7 +49,11 @@ namespace PictureGalleryServer.Services
 
         public AlbumModelDto GetAlbum(int id)
         {
-            throw new NotImplementedException();
+            var album = _albumDbService.GetAlbum(id);
+            AlbumModelDto result = new AlbumModelDto();
+            result.Name = album.Name;
+            result.Id = album.Id;
+            return result;
         }
 
         public List<AlbumModelDto> GetAllPublicAlbums()

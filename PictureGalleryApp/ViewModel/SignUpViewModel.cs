@@ -51,7 +51,7 @@ namespace PictureGalleryApp.ViewModel
                 }
                 else
                 {
-                    UpdateViewCommand.Execute("login");
+                    UpdateViewCommand.Execute("loggedin");
                 }
             });
             thread.Start();

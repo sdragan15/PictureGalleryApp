@@ -8,6 +8,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PictureGalleryApp.Server.Services
 {
@@ -46,7 +47,7 @@ namespace PictureGalleryApp.Server.Services
                 bool registered = proxy.RegisterUser(Map(_signUpModel));
                 if (!registered)
                 {
-                    throw new Exception("User is not registered");
+                    MessageBox.Show("Username already exists!");
                 }
             }
             catch (Exception ex)

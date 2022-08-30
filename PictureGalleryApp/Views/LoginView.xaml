@@ -37,7 +37,7 @@
                     <TextBox Grid.Column="1" Text="{Binding LoginBindingModel.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Padding="5" Margin="10"></TextBox>
                 </Grid>
                 <Button Command="{Binding LoginCommand}" Background="#01d3d8" Padding="5" Margin="10">Log in</Button>
-                <Label x:Name="signUpBtn" HorizontalAlignment="Center">or Sing up
+                <!--<Label x:Name="signUpBtn" HorizontalAlignment="Center">or Sing up
                     <Label.InputBindings>
                         <MouseBinding Command="{Binding UpdateViewCommand}" CommandParameter="signup" MouseAction="LeftClick"/>
                     </Label.InputBindings>
@@ -53,7 +53,7 @@
                             </Style.Triggers>
                         </Style>
                     </Label.Style>
-                </Label>
+                </Label>-->
             </StackPanel>
         </Border>
 

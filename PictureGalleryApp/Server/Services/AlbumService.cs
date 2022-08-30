@@ -372,5 +372,29 @@ namespace PictureGalleryApp.Server.Services
 
             return success;
         }
+
+        public async Task<AlbumModel> GetAlbum(int id)
+        {
+            AlbumModel album = new AlbumModel();
+
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    var albumDto = _proxy.GetAlbum(id);
+                    album = ConvertFromDto(albumDto);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return album;
+        }
     }
 }

@@ -10,6 +10,10 @@
         d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel,
                                          IsDesignTimeCreatable=True}">
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+    </Window.Resources>
+    
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Images/BlueBackground.png" Stretch="UniformToFill"/>
@@ -38,11 +42,15 @@
                 Grid.Row="0"
                 Grid.Column="0" Grid.ColumnSpan="2">Profile</Button>
         <StackPanel Grid.Row="0"
-                    Grid.Column="4" Grid.ColumnSpan="4"
+                    Grid.Column="3" Grid.ColumnSpan="5"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="10">
+            <Button Command="{Binding UpdateViewCommand}" CommandParameter="signup"
+                    Visibility="{Binding Path=IsAdmin, Converter={StaticResource VisibleIfTrueConverter}}"
+                    Width="100" Margin="5">Register User
+            </Button>
             <Button Command="{Binding ShowAllAlbumsCommand}"
                     Width="100" Margin="5">All Albums</Button>
             <Button Command="{Binding ShowMyAlbumsCommand}"

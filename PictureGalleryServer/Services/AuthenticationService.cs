@@ -36,7 +36,14 @@ namespace PictureGalleryServer
                     return "";
                 }
 
-                return user.Token;
+                if(user.Role == Roles.Admin)
+                {
+                    return "Admin";
+                }
+                else
+                {
+                    return "User";
+                }
             }
             catch (Exception ex)
             {
@@ -50,6 +57,11 @@ namespace PictureGalleryServer
         {
             try
             {
+                if(_dbService.GetRegisterByUsername(register.Username) != null)
+                {
+                    return null;
+                }
+
                 if (register.Username.Trim().Equals("") || register.Password.Trim().Equals(""))
                 {
                     return null;
@@ -142,6 +154,10 @@ namespace PictureGalleryServer
             try
             {
                 RegisterModelDto model = Register(register);
+                if(model == null)
+                {
+                    return false;
+                }
                 model.Role = Roles.User;
                 _dbService.AddRegister(model);
                 return true;

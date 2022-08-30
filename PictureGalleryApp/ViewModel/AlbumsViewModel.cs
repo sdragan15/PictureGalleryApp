@@ -25,6 +25,7 @@ namespace PictureGalleryApp.ViewModel
         public ObservableCollection<AlbumModel> AllAlbumNames { get; set; }
         public ICommand SelectAlbum { get; set; }
         public ICommand AddAlbum { get; set; }
+        public ICommand UpdateViewCommand { get; set; }
 
         private AlbumModel _album;
         private AlbumWindow _albumWindow;
@@ -70,6 +71,7 @@ namespace PictureGalleryApp.ViewModel
             _albumServer = album;
             AlbumNames = new ObservableCollection<AlbumModel>();
             AllAlbumNames = new ObservableCollection<AlbumModel>();
+            UpdateViewCommand = new UpdateViewCommand();
         }
 
         private void OpenAlbum(int param)
@@ -84,6 +86,7 @@ namespace PictureGalleryApp.ViewModel
         {
             if (!ShowAll)
             {
+                UpdateViewCommand.Execute("loggedin");
                 AlbumNames.Clear();
                 List<AlbumModel> names = await _albumServer.GetAllPublicAlbums();
                 foreach (AlbumModel name in names)
@@ -93,6 +96,7 @@ namespace PictureGalleryApp.ViewModel
             }
             else
             {
+                UpdateViewCommand.Execute("loggedin");
                 AlbumNames.Clear();
                 List<AlbumModel> names = await _albumServer.GetAllAlbumsForUser(username);
                 foreach (AlbumModel name in names)
@@ -107,7 +111,6 @@ namespace PictureGalleryApp.ViewModel
         {
             if (_username == "") return;
 
-            Console.WriteLine("Working .. .. . . .");
             ShowAll = value;
             GetAlbumsForUser(_username);
         }
