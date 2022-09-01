@@ -37,5 +37,7 @@ namespace Contract
         List<PictureModelDto> GetAllPictureForAlbum(int id);
         [OperationContract]
         void RatePicture(PictureModelDto picture);
+        [OperationContract]
+        List<PictureModelDto> SearchPictures(string searchText, int albumId);
     }
 }

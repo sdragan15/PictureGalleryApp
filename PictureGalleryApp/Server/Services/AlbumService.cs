@@ -396,5 +396,32 @@ namespace PictureGalleryApp.Server.Services
 
             return album;
         }
+
+        public async Task<List<PictureModel>> SearchPictures(string searchText, int albumId)
+        {
+            List<PictureModel> result = new List<PictureModel>();
+
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    var picturesDto = _proxy.SearchPictures(searchText, albumId);
+                    foreach(var picture in picturesDto)
+                    {
+                        result.Add(ConvertFromDto(picture));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return result;
+        }
     }
 }

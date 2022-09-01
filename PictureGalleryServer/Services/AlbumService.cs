@@ -113,5 +113,10 @@ namespace PictureGalleryServer.Services
             pictureModel.NumberOfRatings++;
             _albumDbService.UpdatePicture(pictureModel);
         }
+
+        public List<PictureModelDto> SearchPictures(string searchText, int albumId)
+        {
+            return _albumDbService.GetAllPicturesForAlbum(albumId).Where(x => x.Name.ToLower().Contains(searchText.ToLower())).ToList();
+        }
     }
 }

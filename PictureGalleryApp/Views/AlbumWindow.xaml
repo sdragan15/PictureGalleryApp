@@ -70,32 +70,40 @@
         </ScrollViewer>
 
         <StackPanel Orientation="Vertical"
-                    Grid.Row="1" Grid.Column="6" 
+                    Grid.Row="0" Grid.Column="6" 
                     Grid.ColumnSpan="2"
-                    Grid.RowSpan="3" 
+                    Grid.RowSpan="4" 
                     Margin="10">
-            <Label HorizontalAlignment="Center">Name:</Label>
-            <TextBox Text="{Binding PictureName, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-            <Label HorizontalAlignment="Center">Tags:</Label>
-            <TextBox Text="{Binding PictureTags, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Height="100">
-            </TextBox>
-            <Button
+            <TextBox Width="100" Text="{Binding SearchText}" Margin="0 20 0 0"></TextBox>
+            <Button Command="{Binding SearchCommand}" Width="100" Margin="0 10 0 20">Search</Button>
+            <Border BorderBrush="Black" BorderThickness="3" Padding="5">
+                <StackPanel>
+                    <Label HorizontalAlignment="Center">Name:</Label>
+                    <TextBox Text="{Binding PictureName, UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+                    <Label HorizontalAlignment="Center">Tags:</Label>
+                    <TextBox Text="{Binding PictureTags, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Height="100">
+                    </TextBox>
+                    <Button
                 Command="{Binding BrowsePicture}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="15"
                 Width="100"
                 Margin="10">Browse
-            </Button>
-            <Button
+                    </Button>
+                    <Button
                 Command="{Binding AddPicture}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="15"
                 Width="100"
+                Margin="0 0 0 5"
                 Background="GreenYellow">Add Photo
-            </Button>
+                    </Button>
+                </StackPanel>
+            </Border>
+            
 
         </StackPanel>
 
@@ -106,6 +114,17 @@
                 Background="Red"
                 Command="{Binding DeleteAlbumCommand}" CommandParameter="{Binding ElementName=AlbumWin}">
             Delete Album
+        </Button>
+
+        <Button Grid.Row="4"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Padding="5"
+                Margin="10"
+                Command="{Binding RefreshCommand}">
+            Refresh
         </Button>
     </Grid>
 </Window>

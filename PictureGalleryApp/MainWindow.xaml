@@ -60,6 +60,7 @@
                     Command="{Binding SignOutCommand}"
                     >Sign out</Button>
         </StackPanel>
+
         
 
         <ContentControl Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="6" Content="{Binding CurrentViewModel}"/>

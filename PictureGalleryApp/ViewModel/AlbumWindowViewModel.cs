@@ -23,7 +23,9 @@ namespace PictureGalleryApp.ViewModel
         public RelayCommand<Window> DeleteAlbumCommand { get;set; }
         public RelayCommand CloseWindowCommand { get; set; }
         public RelayCommand<int> SelectPictureCommand { get; set; }
+        public RelayCommand RefreshCommand { get; set; }
         public ObservableCollection<PictureModel> Pictures { get; set; }
+        public RelayCommand SearchCommand { get; set; }
 
         private PictureModel _pictureBindingModel;
         private int _albumId;
@@ -33,6 +35,16 @@ namespace PictureGalleryApp.ViewModel
         private string _pictureName;
         private string _pictureTags;
         private AlbumModel _albumBindingModel;
+        private string _searchText;
+
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                Set(ref _searchText, value);
+            }
+        }
 
         public AlbumModel AlbumBindingModel
         {
@@ -86,6 +98,18 @@ namespace PictureGalleryApp.ViewModel
             SelectPictureCommand = new RelayCommand<int>(OpenPicture);
             PictureName = "";
             PictureTags = "";
+            RefreshCommand = new RelayCommand(Refresh);
+            SearchCommand = new RelayCommand(Search);
+        }
+
+        private async void Search()
+        {
+            Pictures.Clear();
+            List<PictureModel> res = await _albumService.SearchPictures(SearchText, _albumId);
+            foreach (PictureModel picture in res)
+            {
+                Pictures.Add(picture);
+            }
         }
 
         public async void DeleteAlbum(Window window)
@@ -168,6 +192,11 @@ namespace PictureGalleryApp.ViewModel
                 }
 
             }
+        }
+
+        private void Refresh()
+        {
+            GetAlbumPictures(_albumId);
         }
     }
 }

@@ -23,5 +23,6 @@ namespace PictureGalleryApp.Server.Contract
         Task<PictureModel> GetPicture(int albumId, int id);
         Task<bool> UpdatePicture(PictureModel picture);
         Task<bool> DeletePicture(int albumId, int id);
+        Task<List<PictureModel>> SearchPictures(string searchText, int albumId); 
     }
 }

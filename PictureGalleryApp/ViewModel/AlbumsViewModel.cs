@@ -26,6 +26,7 @@ namespace PictureGalleryApp.ViewModel
         public ICommand SelectAlbum { get; set; }
         public ICommand AddAlbum { get; set; }
         public ICommand UpdateViewCommand { get; set; }
+        public ICommand RefreshCommand { get; set; }
 
         private AlbumModel _album;
         private AlbumWindow _albumWindow;
@@ -72,6 +73,7 @@ namespace PictureGalleryApp.ViewModel
             AlbumNames = new ObservableCollection<AlbumModel>();
             AllAlbumNames = new ObservableCollection<AlbumModel>();
             UpdateViewCommand = new UpdateViewCommand();
+            RefreshCommand = new RelayCommand(Refresh);
         }
 
         private void OpenAlbum(int param)
@@ -124,6 +126,11 @@ namespace PictureGalleryApp.ViewModel
         {
             Album.User = new UserModelDto() { Username = _username };
             await _albumServer.AddAlbum(Album);
+            GetAlbumsForUser(_username);
+        }
+
+        public void Refresh()
+        {
             GetAlbumsForUser(_username);
         }
     }
