@@ -14,6 +14,9 @@
         <DataTemplate DataType="{x:Type viewModel:AlbumsViewModel}">
             <views:AlbumsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ProfileViewModel}">
+            <views:ProfileView/>
+        </DataTemplate>
     </Application.Resources>
     
 </Application>

@@ -47,6 +47,7 @@
                 Stretch="Uniform"/>
         </Canvas>
 
+
         <Border Grid.Row="4"
                 Grid.Column="2"
                 CornerRadius="10"

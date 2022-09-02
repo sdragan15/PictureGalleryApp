@@ -58,11 +58,11 @@ namespace TestClient
 
                             break;
                         case 4:
-                            List<string> names = proxy.GetAllNamesForUser("slavko");
-                            foreach(string name in names)
-                            {
-                                Console.WriteLine(name);
-                            }
+                            //List<string> names = proxy.GetAllNamesForUser("slavko");
+                            //foreach(string name in names)
+                            //{
+                            //    Console.WriteLine(name);
+                            //}
 
                             break;
                         default:

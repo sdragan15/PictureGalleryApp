@@ -40,6 +40,7 @@
         <Button Width="100" Margin="5"
                 Height="25"
                 Grid.Row="0"
+                Command="{Binding ProfileCommand}"
                 Grid.Column="0" Grid.ColumnSpan="2">Profile</Button>
         <StackPanel Grid.Row="0"
                     Grid.Column="3" Grid.ColumnSpan="5"

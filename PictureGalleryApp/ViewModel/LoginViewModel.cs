@@ -38,7 +38,7 @@ namespace PictureGalleryApp.ViewModel
             }
         }
 
-        //[Obsolete("Only for design data", true)]
+        [Obsolete("Only for design data", true)]
         public LoginViewModel()
         {
             

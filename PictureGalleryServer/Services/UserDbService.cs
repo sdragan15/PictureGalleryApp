@@ -35,7 +35,13 @@ namespace PictureGalleryServer.Services
 
         public bool UpdateUser(UserModelDto model)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.Where(u => u.Username == model.Username && u.IsDeleted == false).FirstOrDefault();
+            if (user == null) return false;
+
+            user.Name = model.Username;
+            user.Lastname = model.Lastname;
+            _context.SaveChanges();
+            return true;
         }
     }
 }

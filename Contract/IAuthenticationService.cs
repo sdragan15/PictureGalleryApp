@@ -19,5 +19,9 @@ namespace Contract
         string Login(LoginModelDto login);
         [OperationContract]
         bool IsAuthenticated(string token);
+        [OperationContract]
+        UserModelDto GetUser(string username);
+        [OperationContract]
+        bool UpdateUser(UserModelDto user);
     }
 }

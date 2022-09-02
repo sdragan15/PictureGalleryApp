@@ -20,11 +20,13 @@ namespace PictureGalleryApp.ViewModel
         public ICommand ShowMyAlbumsCommand { get; set; }
         public ICommand SignOutCommand { get; set; }
         public ICommand UpdateViewCommand { get; set; }
+        public ICommand ProfileCommand { get; set; }
 
         private ViewModelBase _currentViewModel;
         private SignUpViewModel _signUpViewModel;
         private LoginViewModel _loginViewModel;
         private AlbumsViewModel _albumsViewModel;
+        private ProfileViewModel _profileViewModel;
         private bool _isAdmin;
 
         public bool IsAdmin
@@ -51,7 +53,7 @@ namespace PictureGalleryApp.ViewModel
         }
 
         [Obsolete("Only for design data", true)]
-        public MainWindowViewModel(): this(new LoginViewModel(), null, new AlbumsViewModel())
+        public MainWindowViewModel(): this(new LoginViewModel(), null, new AlbumsViewModel(), null)
         {
             if (!this.IsInDesignMode)
             {
@@ -59,8 +61,9 @@ namespace PictureGalleryApp.ViewModel
             }
         }
 
-        public MainWindowViewModel(LoginViewModel loginView, SignUpViewModel signUpView, AlbumsViewModel albumsView)
+        public MainWindowViewModel(LoginViewModel loginView, SignUpViewModel signUpView, AlbumsViewModel albumsView, ProfileViewModel profileViewModel)
         {
+            _profileViewModel = profileViewModel;
             IsAdmin = false;
             _signUpViewModel = signUpView;
             _loginViewModel = loginView;
@@ -72,6 +75,7 @@ namespace PictureGalleryApp.ViewModel
             ShowMyAlbumsCommand = new RelayCommand(ShowMyAlbums);
             SignOutCommand = new RelayCommand(SignOut);
             UpdateViewCommand = new UpdateViewCommand();
+            ProfileCommand = new RelayCommand(Profile);
         }
 
         private void SignOut()
@@ -123,6 +127,16 @@ namespace PictureGalleryApp.ViewModel
                 throw new ArgumentException("Arrgument out of range " + message.ViewModelType.ToString());
             }
 
+        }
+
+        public void Profile()
+        {
+            if(_loginViewModel.GetUsername() != null)
+            {
+                _profileViewModel.GetUser(_loginViewModel.GetUsername());
+                CurrentViewModel = _profileViewModel;
+                Messenger.Default.Register<ChangePage>(this, UpdateCurrentView);
+            }
         }
     }
 }

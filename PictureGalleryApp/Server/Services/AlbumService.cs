@@ -21,6 +21,12 @@ namespace PictureGalleryApp.Server.Services
     {
         private string _endpoint = "net.tcp://localhost:10105/Albums";
         private IAlbumService _proxy;
+        private IConverter _converter;
+
+        public AlbumService(IConverter converter)
+        {
+            _converter = converter;
+        }
 
         public async Task<bool> AddPictureToServer(PictureModel picture)
         {
@@ -31,7 +37,7 @@ namespace PictureGalleryApp.Server.Services
                 try
                 {
                     Connect();
-                    _proxy.AddPicture(ConvertToDto(picture));
+                    _proxy.AddPicture(_converter.ConvertToDto(picture));
                 }
                 catch (Exception ex)
                 {
@@ -62,7 +68,7 @@ namespace PictureGalleryApp.Server.Services
                     resultDto = _proxy.GetAllAlbumsForUser(username);
                     foreach (AlbumModelDto album in resultDto)
                     {
-                        result.Add(ConvertFromDto(album));
+                        result.Add(_converter.ConvertFromDto(album));
                     }
                 }
                 catch (Exception ex)
@@ -75,69 +81,6 @@ namespace PictureGalleryApp.Server.Services
             await task;
 
             return result;
-        }
-
-        private AlbumModel ConvertFromDto(AlbumModelDto album)
-        {
-            AlbumModel result = new AlbumModel()
-            {
-                Name = album.Name,
-                Id = album.Id,
-            };
-
-            return result;
-        }
-
-        private PictureModelDto ConvertToDto(PictureModel picture)
-        {
-            PictureModelDto res = new PictureModelDto()
-            {
-                Id = picture.Id,
-                Name = picture.Name,
-                Date = picture.Date,
-                ImageUrl = picture.Url,
-                Rating = picture.Raiting,
-                UserRated = "",
-                Tags = picture.Tags,
-                AlbumId = picture.AlbumId,
-                NumberOfRatings = picture.NumberOfRatings,
-            };
-
-            foreach(var user in picture.UserRated)
-            {
-                res.UserRated += ',' + user;
-            }
-
-            return res;
-        }
-
-        private PictureModel ConvertFromDto(PictureModelDto picture)
-        {
-            PictureModel res = new PictureModel()
-            {
-                Id = picture.Id,
-                Name = picture.Name,
-                Url = picture.ImageUrl,
-                Date = picture.Date,
-                Tags = picture.Tags,
-                AlbumId = picture.AlbumId,
-                UserRated = new List<string>(),
-                Raiting = picture.Rating,
-                NumberOfRatings= picture.NumberOfRatings,
-            };
-
-            if (String.IsNullOrEmpty(picture.UserRated))
-            {
-                return res;
-            }
-
-            var users = picture.UserRated.Split(',');
-            foreach (var user in users)
-            {
-                res.UserRated.Add(user);
-            }
-
-            return res;
         }
 
 
@@ -175,7 +118,7 @@ namespace PictureGalleryApp.Server.Services
                     {
                         foreach (PictureModelDto picture in resultDto)
                         {
-                            result.Add(ConvertFromDto(picture));
+                            result.Add(_converter.ConvertFromDto(picture));
                         }
                     }
                     
@@ -201,7 +144,7 @@ namespace PictureGalleryApp.Server.Services
                 try
                 {
                     Connect();
-                    _proxy.AddAlbum(ConvertToDto(album));
+                    _proxy.AddAlbum(_converter.ConvertToDto(album));
 
                 }
                 catch (Exception ex)
@@ -215,16 +158,6 @@ namespace PictureGalleryApp.Server.Services
             await task;
 
             return success;
-        }
-
-        private AlbumModelDto ConvertToDto(AlbumModel album)
-        {
-            return new AlbumModelDto()
-            {
-                Name = album.Name,
-                IsPrivate = album.IsPrivate,
-                User = album.User,
-            };
         }
 
         public async Task<bool> DeleteAlbum(int id)
@@ -262,7 +195,7 @@ namespace PictureGalleryApp.Server.Services
                     resultDto = _proxy.GetAllPublicAlbums();
                     foreach (AlbumModelDto album in resultDto)
                     {
-                        result.Add(ConvertFromDto(album));
+                        result.Add(_converter.ConvertFromDto(album));
                     }
                 }
                 catch (Exception ex)
@@ -286,7 +219,7 @@ namespace PictureGalleryApp.Server.Services
                 try
                 {
                     Connect();
-                    _proxy.RatePicture(ConvertToDto(picture));
+                    _proxy.RatePicture(_converter.ConvertToDto(picture));
                 }
                 catch (Exception ex)
                 {
@@ -311,7 +244,7 @@ namespace PictureGalleryApp.Server.Services
                 {
                     Connect();
                     PictureModelDto resultDto = _proxy.GetPicture(albumId, id);
-                    result = ConvertFromDto(resultDto);
+                    result = _converter.ConvertFromDto(resultDto);
                 }
                 catch (Exception ex)
                 {
@@ -334,7 +267,7 @@ namespace PictureGalleryApp.Server.Services
                 try
                 {
                     Connect();
-                    _proxy.UpdatePicture(ConvertToDto(picture));
+                    _proxy.UpdatePicture(_converter.ConvertToDto(picture));
                 }
                 catch (Exception ex)
                 {
@@ -383,7 +316,7 @@ namespace PictureGalleryApp.Server.Services
                 {
                     Connect();
                     var albumDto = _proxy.GetAlbum(id);
-                    album = ConvertFromDto(albumDto);
+                    album = _converter.ConvertFromDto(albumDto);
                 }
                 catch (Exception ex)
                 {
@@ -409,7 +342,7 @@ namespace PictureGalleryApp.Server.Services
                     var picturesDto = _proxy.SearchPictures(searchText, albumId);
                     foreach(var picture in picturesDto)
                     {
-                        result.Add(ConvertFromDto(picture));
+                        result.Add(_converter.ConvertFromDto(picture));
                     }
                 }
                 catch (Exception ex)

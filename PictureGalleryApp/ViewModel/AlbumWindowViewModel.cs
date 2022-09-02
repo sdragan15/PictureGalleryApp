@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using PictureGalleryApp.Model;
+using PictureGalleryApp.Server.Contract;
 using PictureGalleryApp.Server.Services;
 using PictureGalleryApp.Views;
 using System;
@@ -29,7 +30,7 @@ namespace PictureGalleryApp.ViewModel
 
         private PictureModel _pictureBindingModel;
         private int _albumId;
-        private AlbumService _albumService;
+        private IAlbumAppService _albumService;
         private PictureWindowViewModel _pictureWindowViewModel;
         private PictureWindow _pictureWindow;
         private string _pictureName;
@@ -85,10 +86,10 @@ namespace PictureGalleryApp.ViewModel
             }
         }
 
-        public AlbumWindowViewModel(PictureWindowViewModel pictureWindowViewModel)
+        public AlbumWindowViewModel(PictureWindowViewModel pictureWindowViewModel, IAlbumAppService albumService)
         {
             _pictureWindowViewModel = pictureWindowViewModel;
-            _albumService = new AlbumService();
+            _albumService = albumService;
             AddPicture = new RelayCommand(AddPictureToServer, AddPictureValidation);
             BrowsePicture = new RelayCommand(BrowsePictureDialog);
             GetPictures = new RelayCommand<int>(GetAlbumPictures);

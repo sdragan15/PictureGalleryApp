@@ -84,10 +84,6 @@ namespace PictureGalleryServer.Services
             
         }
 
-        public bool UpdateUser(UserModelDto model)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool UpdateRegister(RegisterModelDto model)
         {
@@ -130,6 +126,17 @@ namespace PictureGalleryServer.Services
             {
                 throw new Exception("User is not authorized!");
             }
+        }
+
+        public bool UpdateUser(UserModelDto model)
+        {
+            var user = _context.Users.Where(u => u.Username == model.Username && u.IsDeleted == false).FirstOrDefault();
+            if (user == null) return false;
+
+            user.Name = model.Name;
+            user.Lastname = model.Lastname;
+            _context.SaveChanges();
+            return true;
         }
     }
 }
