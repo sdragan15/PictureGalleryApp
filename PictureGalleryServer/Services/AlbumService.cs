@@ -118,5 +118,10 @@ namespace PictureGalleryServer.Services
         {
             return _albumDbService.GetAllPicturesForAlbum(albumId).Where(x => x.Name.ToLower().Contains(searchText.ToLower())).ToList();
         }
+
+        public bool RestorePicture(int albumId, int pictureId)
+        {
+            return _albumDbService.RestorePicture(albumId, pictureId);
+        }
     }
 }

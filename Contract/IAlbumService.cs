@@ -39,5 +39,7 @@ namespace Contract
         void RatePicture(PictureModelDto picture);
         [OperationContract]
         List<PictureModelDto> SearchPictures(string searchText, int albumId);
+        [OperationContract]
+        bool RestorePicture(int albumId, int pictureId);
     }
 }

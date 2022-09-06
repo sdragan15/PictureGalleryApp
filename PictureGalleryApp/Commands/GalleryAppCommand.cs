@@ -22,13 +22,21 @@ namespace PictureGalleryApp.Commands
             CommandHistory.Add(new CommandHistoryItem<T>() { command = command, item = picture });
         }
 
-        //public Task Redo()
-        //{
-        //    return;
-        //}
-        //public Task Undo()
-        //{
-        //    return;
-        //}
+        public async Task Redo()
+        {
+            if(CommandHistory.Count > 0)
+            {
+                await CommandHistory.Last().command.Redo();
+            }
+            
+        }
+        public async Task Undo()
+        {
+            if(CommandHistory.Count > 0)
+            {
+                await CommandHistory.Last().command.Undo();
+            }
+            
+        }
     }
 }

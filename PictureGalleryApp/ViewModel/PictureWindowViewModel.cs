@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using PictureGalleryApp.Commands;
 using PictureGalleryApp.Model;
 using PictureGalleryApp.Server.Contract;
 using System;
@@ -23,6 +24,10 @@ namespace PictureGalleryApp.ViewModel
         private int _ratingSlider;
         private string _pictureName;
         private string _pictureTags;
+        private DeletePictureCommand _deleteCommand;
+        private GalleryAppCommand<PictureModel> _galleryAppCommand;
+        private UpdatePictureCommand _updatePictureCommand;
+        private RatePictureCommand _ratePictureCommand;
 
 
 
@@ -67,13 +72,17 @@ namespace PictureGalleryApp.ViewModel
             }
         }
 
-        public PictureWindowViewModel(IAlbumAppService albumAppService)
+        public PictureWindowViewModel(IAlbumAppService albumAppService, GalleryAppCommand<PictureModel> galleryAppCommand)
         {
+            _galleryAppCommand = galleryAppCommand;
             _albumAppService = albumAppService;
             RatingSlider = 3;
             UpdateCommand = new RelayCommand(Update, UpdateValidate);
             DeleteCommand = new RelayCommand<Window>(Delete);
             RateCommand = new RelayCommand(Rate, RateValidate);
+            _deleteCommand = new DeletePictureCommand(_albumAppService);
+            _updatePictureCommand = new UpdatePictureCommand(_albumAppService);
+            _ratePictureCommand = new RatePictureCommand(_albumAppService);
         }
 
         public void SetPicture(PictureModel picture)
@@ -97,7 +106,8 @@ namespace PictureGalleryApp.ViewModel
         {
             PictureBindingModel.Raiting = RatingSlider;
             PictureBindingModel.UserRated = new List<string> { _username };
-            await _albumAppService.RatePicture(PictureBindingModel);
+
+            await _galleryAppCommand.Execute(_ratePictureCommand, PictureBindingModel);
             PictureBindingModel = await _albumAppService.GetPicture(PictureBindingModel.AlbumId, PictureBindingModel.Id);
             PictureBindingModel.Raiting = Math.Round(PictureBindingModel.Raiting, 2);
             RateCommand.RaiseCanExecuteChanged();
@@ -110,7 +120,7 @@ namespace PictureGalleryApp.ViewModel
 
         private async void Update()
         {
-            await _albumAppService.UpdatePicture(PictureBindingModel);
+            await _galleryAppCommand.Execute(_updatePictureCommand, PictureBindingModel);
         }
 
         private bool UpdateValidate()
@@ -126,7 +136,7 @@ namespace PictureGalleryApp.ViewModel
 
         private async void Delete(Window window)
         {
-            await _albumAppService.DeletePicture(PictureBindingModel.AlbumId, PictureBindingModel.Id);
+            await _galleryAppCommand.Execute(_deleteCommand, PictureBindingModel);
             window.Close();
         }
     }

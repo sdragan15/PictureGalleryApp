@@ -121,11 +121,20 @@
                     Grid.ColumnSpan="2"
                     Orientation="Horizontal">
             <Button 
+                Command="{Binding UndoCommand}"
                 Padding="5"
                 Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
                 Undo
+            </Button>
+            <Button 
+                Command="{Binding RedoCommand}"
+                Padding="5"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                Redo
             </Button>
             <Button
                 HorizontalAlignment="Center"

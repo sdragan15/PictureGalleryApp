@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace PictureGalleryApp.Commands
 {
-    public class AddPictureCommand : PictureCommand<PictureModel>
+    public class UpdatePictureCommand : PictureCommand<PictureModel>
     {
         private PictureModel picture;
         private IAlbumAppService _service;
 
-        public AddPictureCommand(IAlbumAppService albumAppService)
+        public UpdatePictureCommand(IAlbumAppService albumAppService)
         {
             _service = albumAppService;
         }
 
         public override async Task Execute()
         {
-            await _service.AddPictureToServer(picture);
+            await _service.UpdatePicture(picture);
         }
 
-        public override async Task Redo()
+        public override Task Redo()
         {
-            await _service.RestorePicture(picture.AlbumId, picture.Id);
+            throw new NotImplementedException();
         }
 
         public override void Set(PictureModel value)
@@ -33,9 +33,9 @@ namespace PictureGalleryApp.Commands
             picture = value;
         }
 
-        public override async Task Undo()
+        public override Task Undo()
         {
-            await _service.DeletePicture(picture.AlbumId, picture.Id);
+            throw new NotImplementedException();
         }
     }
 }

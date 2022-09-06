@@ -356,5 +356,28 @@ namespace PictureGalleryApp.Server.Services
 
             return result;
         }
+
+        public async Task<bool> RestorePicture(int albumId, int pictureId)
+        {
+            bool success = true;
+
+            Task task = new Task(() =>
+            {
+                try
+                {
+                    Connect();
+                    _proxy.RestorePicture(albumId, pictureId);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            task.Start();
+            await task;
+
+            return success;
+        }
     }
 }

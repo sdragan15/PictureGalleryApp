@@ -20,5 +20,6 @@ namespace Contract
         bool DeletePicture(int albumId, int id);
         PictureModelDto GetPicture(int albumId, int id);
         List<PictureModelDto> GetAllPicturesForAlbum(int id);
+        bool RestorePicture(int albumId, int id);
     }
 }

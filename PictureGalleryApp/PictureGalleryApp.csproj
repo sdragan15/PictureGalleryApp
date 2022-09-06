@@ -101,10 +101,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\AddPictureCommand.cs" />
+    <Compile Include="Commands\DeletePictureCommand.cs" />
     <Compile Include="Commands\GalleryAppCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\MyICommand.cs" />
     <Compile Include="Commands\PictureCommand.cs" />
+    <Compile Include="Commands\RatePictureCommand.cs" />
+    <Compile Include="Commands\UpdatePictureCommand.cs" />
     <Compile Include="Commands\UpdateViewCommand.cs" />
     <Compile Include="Model\AlbumModel.cs" />
     <Compile Include="Model\CommandHistoryItem.cs" />

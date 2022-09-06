@@ -28,6 +28,8 @@ namespace PictureGalleryApp.ViewModel
         public RelayCommand RefreshCommand { get; set; }
         public ObservableCollection<PictureModel> Pictures { get; set; }
         public RelayCommand SearchCommand { get; set; }
+        public RelayCommand UndoCommand { get; set; }
+        public RelayCommand RedoCommand { get; set; }
 
         private PictureModel _pictureBindingModel;
         private int _albumId;
@@ -106,6 +108,21 @@ namespace PictureGalleryApp.ViewModel
             SearchCommand = new RelayCommand(Search);
             _addPictureCommand = new AddPictureCommand(_albumService);
             _galleryAppCommand = galleryAppCommand;
+            UndoCommand = new RelayCommand(Undo);
+            RedoCommand = new RelayCommand(Redo);
+        }
+
+        private async void Undo()
+        {
+            await _galleryAppCommand?.Undo();
+            GetAlbumPictures(_albumId);
+
+        }
+
+        private async void Redo()
+        {
+            await _galleryAppCommand?.Redo();
+            GetAlbumPictures(_albumId);
         }
 
         private async void Search()

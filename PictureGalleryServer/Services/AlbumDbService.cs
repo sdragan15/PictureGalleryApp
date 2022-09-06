@@ -98,6 +98,16 @@ namespace PictureGalleryServer.Services
             return upPicture;
         }
 
+        public bool RestorePicture(int albumId, int id)
+        {
+            var picture = GetPicture(albumId, id);
+            if(picture == null) return false;
+
+            picture.IsDeleted = false;
+            _context.SaveChanges();
+            return true;
+        }
+
         public bool UpdateAlbum(AlbumModelDto album)
         {
             throw new NotImplementedException();
