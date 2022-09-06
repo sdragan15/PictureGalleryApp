@@ -1,6 +1,8 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using PictureGalleryApp.Commands;
 using PictureGalleryApp.Contract;
+using PictureGalleryApp.Model;
 using PictureGalleryApp.Server.Contract;
 using PictureGalleryApp.Server.Services;
 using PictureGalleryApp.ViewModel;
@@ -39,6 +41,7 @@ namespace PictureGalleryApp
             container.Register(Component.For<AuthTemplate>().ImplementedBy<LoginService>());
             container.Register(Component.For<IAlbumAppService>().ImplementedBy<AlbumService>());
             container.Register(Component.For<IUserAppService>().ImplementedBy<UserService>());
+            container.Register(Component.For<GalleryAppCommand<PictureModel>>());
 
             var mainWindow = container.Resolve<MainWindow>();
             mainWindow.ShowDialog();

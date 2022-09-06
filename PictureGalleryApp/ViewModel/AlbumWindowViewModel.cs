@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
+using PictureGalleryApp.Commands;
 using PictureGalleryApp.Model;
 using PictureGalleryApp.Server.Contract;
 using PictureGalleryApp.Server.Services;
@@ -37,6 +38,8 @@ namespace PictureGalleryApp.ViewModel
         private string _pictureTags;
         private AlbumModel _albumBindingModel;
         private string _searchText;
+        private PictureCommand<PictureModel> _addPictureCommand;
+        private GalleryAppCommand<PictureModel> _galleryAppCommand;
 
         public string SearchText
         {
@@ -86,7 +89,7 @@ namespace PictureGalleryApp.ViewModel
             }
         }
 
-        public AlbumWindowViewModel(PictureWindowViewModel pictureWindowViewModel, IAlbumAppService albumService)
+        public AlbumWindowViewModel(PictureWindowViewModel pictureWindowViewModel, IAlbumAppService albumService, GalleryAppCommand<PictureModel> galleryAppCommand)
         {
             _pictureWindowViewModel = pictureWindowViewModel;
             _albumService = albumService;
@@ -101,6 +104,8 @@ namespace PictureGalleryApp.ViewModel
             PictureTags = "";
             RefreshCommand = new RelayCommand(Refresh);
             SearchCommand = new RelayCommand(Search);
+            _addPictureCommand = new AddPictureCommand(_albumService);
+            _galleryAppCommand = galleryAppCommand;
         }
 
         private async void Search()
@@ -142,7 +147,8 @@ namespace PictureGalleryApp.ViewModel
             PictureBindingModel.Name = PictureName;
             PictureBindingModel.Tags = PictureTags;
             PictureBindingModel.Date = DateTime.Now;
-            await _albumService.AddPictureToServer(PictureBindingModel);
+
+            await _galleryAppCommand.Execute(_addPictureCommand, PictureBindingModel);
             Pictures.Clear();
             GetAlbumPictures(_albumId);
             PictureBindingModel.Clear();
