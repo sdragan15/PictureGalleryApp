@@ -23,17 +23,17 @@ namespace PictureGalleryServer.Services
             _context.SaveChanges();
         }
 
-        public bool AddPicture(PictureModelDto picture)
+        public int AddPicture(PictureModelDto picture)
         {
             AlbumModelDto album = _context.Albums.FirstOrDefault(x => x.Id == picture.AlbumId);
             if (album == null)
             {
-                return false;
+                return -1;
             }
 
             album.Pictures.Add(picture);
             _context.SaveChanges();
-            return true;
+            return picture.Id;
         }
 
         public bool CreateAlbum(AlbumModelDto album)
@@ -98,9 +98,18 @@ namespace PictureGalleryServer.Services
             return upPicture;
         }
 
+        private PictureModelDto GetDeletedPicture(int albumId, int id)
+        {
+            var album = _context.Albums.FirstOrDefault(x => x.Id == albumId);
+            var upPicture = album.Pictures.Where(x => x.Id == id).FirstOrDefault();
+            if (upPicture == null) return null;
+
+            return upPicture;
+        }
+
         public bool RestorePicture(int albumId, int id)
         {
-            var picture = GetPicture(albumId, id);
+            var picture = GetDeletedPicture(albumId, id);
             if(picture == null) return false;
 
             picture.IsDeleted = false;

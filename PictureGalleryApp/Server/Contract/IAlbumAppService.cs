@@ -13,7 +13,7 @@ namespace PictureGalleryApp.Server.Contract
     {
         Task<List<AlbumModel>> GetAllAlbumsForUser(string username);
         Task<List<PictureModel>> GetAllPicturesForAlbum(int id);
-        Task<bool> AddPictureToServer(PictureModel picture);
+        Task<int> AddPictureToServer(PictureModel picture);
         Task<bool> AddAlbum(AlbumModel album);
         Task<AlbumModel> GetAlbum(int id);
         Task<bool> DeleteAlbum(int id);

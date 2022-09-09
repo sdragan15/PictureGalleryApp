@@ -26,7 +26,7 @@ namespace Contract
         [OperationContract]
         List<AlbumModelDto> GetAllAlbumsForUser(string username);
         [OperationContract]
-        bool AddPicture(PictureModelDto picture);
+        int AddPicture(PictureModelDto picture);
         [OperationContract]
         bool DeletePicture(int albumId, int id);
         [OperationContract]

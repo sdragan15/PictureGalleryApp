@@ -14,7 +14,7 @@ namespace PictureGalleryServer
     {
         private static string secretKey = "f002c204c@f6(bb942765#826bDfe68affe80!08d6e714cGfb8bf1cd3b20d92c";
         private AuthDbService _dbService;
-        private UserDbService _userDbService;
+        private IUserDbService _userDbService;
 
         public AuthenticationService()
         {

@@ -131,7 +131,7 @@ namespace PictureGalleryApp.ViewModel
 
         public void Profile()
         {
-            if(_loginViewModel.GetUsername() != null)
+            if(!String.IsNullOrEmpty(_loginViewModel.GetUsername()))
             {
                 _profileViewModel.GetUser(_loginViewModel.GetUsername());
                 CurrentViewModel = _profileViewModel;

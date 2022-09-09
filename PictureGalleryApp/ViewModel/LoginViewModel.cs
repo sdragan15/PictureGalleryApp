@@ -22,6 +22,7 @@ namespace PictureGalleryApp.ViewModel
         public ICommand LoginCommand { get; set; }
         public IServerCommand LoginServerCommand { get; set; }
         private AlbumsViewModel _albumViewModel;
+        private string _username;
 
         PictureWindowViewModel _pictureWindowViewModel;
         private LoginModel _loginBindingModel = new LoginModel();
@@ -83,6 +84,7 @@ namespace PictureGalleryApp.ViewModel
                 _albumViewModel.GetAlbumsForUser(LoginBindingModel.Username);
                 _albumViewModel.SetUsername(LoginBindingModel.Username);
                 _pictureWindowViewModel.SetUsername(LoginBindingModel.Username);
+                _username = LoginBindingModel.Username;
             }
         }
 
@@ -91,11 +93,12 @@ namespace PictureGalleryApp.ViewModel
             _albumViewModel.SetUsername("");
             LoginBindingModel.Username = "";
             LoginBindingModel.Password = "";
+            _username = null;
         }
 
         public string GetUsername()
         {
-            return LoginBindingModel.Username;
+            return _username;
         }
 
         //private void Login()

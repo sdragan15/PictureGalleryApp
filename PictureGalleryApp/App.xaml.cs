@@ -37,10 +37,10 @@ namespace PictureGalleryApp
             container.Register(Component.For<ProfileViewModel>());
             container.Register(Component.For<MainWindow>());
             container.Register(Component.For<AlbumWindow>());
-            container.Register(Component.For<IConverter>().ImplementedBy<Converter>());
-            container.Register(Component.For<AuthTemplate>().ImplementedBy<LoginService>());
-            container.Register(Component.For<IAlbumAppService>().ImplementedBy<AlbumService>());
-            container.Register(Component.For<IUserAppService>().ImplementedBy<UserService>());
+            container.Register(Component.For<IConverter>().ImplementedBy<Converter>().LifestyleSingleton());
+            container.Register(Component.For<AuthTemplate>().ImplementedBy<LoginService>().LifestyleSingleton());
+            container.Register(Component.For<IAlbumAppService>().ImplementedBy<AlbumService>().LifestyleSingleton());
+            container.Register(Component.For<IUserAppService>().ImplementedBy<UserService>().LifestyleSingleton());
             container.Register(Component.For<GalleryAppCommand<PictureModel>>());
 
             var mainWindow = container.Resolve<MainWindow>();

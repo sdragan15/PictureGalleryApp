@@ -26,7 +26,7 @@ namespace PictureGalleryServer.Services
             _albumDbService.AddAlbum(album);
         }
 
-        public bool AddPicture(PictureModelDto picture)
+        public int AddPicture(PictureModelDto picture)
         {
             Console.WriteLine("Adding picture...");
             return _albumDbService.AddPicture(picture);

@@ -20,12 +20,20 @@ namespace PictureGalleryApp.Commands
 
         public override async Task Execute()
         {
-            await _service.AddPictureToServer(picture);
+            picture.Id = await _service.AddPictureToServer(picture);
         }
 
         public override async Task Redo()
         {
-            await _service.RestorePicture(picture.AlbumId, picture.Id);
+            try
+            {
+                await _service.RestorePicture(picture.AlbumId, picture.Id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         public override void Set(PictureModel value)
@@ -35,7 +43,15 @@ namespace PictureGalleryApp.Commands
 
         public override async Task Undo()
         {
-            await _service.DeletePicture(picture.AlbumId, picture.Id);
+            try
+            {
+                await _service.DeletePicture(picture.AlbumId, picture.Id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 }

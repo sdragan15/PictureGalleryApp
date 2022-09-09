@@ -28,16 +28,16 @@ namespace PictureGalleryApp.Server.Services
             _converter = converter;
         }
 
-        public async Task<bool> AddPictureToServer(PictureModel picture)
+        public async Task<int> AddPictureToServer(PictureModel picture)
         {
-            bool error = false;
+            int id = -1;
 
             Task task = new Task(() =>
             {
                 try
                 {
                     Connect();
-                    _proxy.AddPicture(_converter.ConvertToDto(picture));
+                    id = _proxy.AddPicture(_converter.ConvertToDto(picture));
                 }
                 catch (Exception ex)
                 {
@@ -49,11 +49,7 @@ namespace PictureGalleryApp.Server.Services
             task.Start();
             await task;
 
-            if (error)
-            {
-                return false;
-            }
-            return true;
+            return id;
         }
 
         public async Task<List<AlbumModel>> GetAllAlbumsForUser(string username)
